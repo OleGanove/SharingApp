@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'devise'
 gem 'rails',        '5.0.0.1'
 gem 'puma',         '3.4.0'
 gem 'sass-rails',   '5.0.6'
@@ -9,6 +10,9 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.4.1'
 gem 'bootstrap-sass', '3.3.6'
+gem 'jquery-turbolinks'
+gem 'devise-i18n-views'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'

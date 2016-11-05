@@ -11,12 +11,12 @@
   <body>
 
     <%= render 'layouts/header' %>
+    <%= render 'layouts/flash' %>
 
-    <%= yield %>
     <div class="container">
+      <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
-
 
   </body>
 </html>

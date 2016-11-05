@@ -3,9 +3,14 @@
         <%= link_to "Sharify", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Hilfe", help_path %></li>
-            <li><%= link_to "Einloggen", '#' %></li>
+            <% if user_signed_in? %>
+              <li>Hallo <%= current_user.email %></li>
+              <li><%= link_to 'Profil', edit_user_registration_path %></li>
+              <li><%= link_to 'Ausloggen', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Einloggen', new_user_session_path %></li>
+              <li><%= link_to 'Registrieren', new_user_registration_path %></li>
+            <% end %>
           </ul>
         </nav>
       </div>
