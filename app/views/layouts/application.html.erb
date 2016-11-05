@@ -3,20 +3,26 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "home" if controller_name == "home" %>
     <%= stylesheet_link_tag    'application', media: 'all',
                                               'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300">
     <%= render 'layouts/shim' %>
   </head>
-  <body>
-
-    <%= render 'layouts/header' %>
-    <%= render 'layouts/flash' %>
-
-    <div class="container">
+  
+  <% if action_name === "home" %>
+    <body class="body_home">
       <%= yield %>
-      <%= render 'layouts/footer' %>
-    </div>
+  <% else %>
+    <body>
+      <%= render 'layouts/header' %>
+      <%= render 'layouts/flash' %>
 
-  </body>
+      <div class="container">
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+      </div>
+  <% end %>
+    </body>
 </html>
