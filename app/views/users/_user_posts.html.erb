@@ -1,0 +1,14 @@
+    <% if @user.posts.any? %>
+      <h3>Posts (<%= @user.posts.count %>)</h3>
+      <ol>
+        <% @user.posts.each do |post| %>
+      	  <li id="post-<%= post.id%>">      	 
+	  		<span class="user"><%= link_to post.user.email, post.user %></span>
+	  		<span class="description"><%= post.description %></span>
+	  		<span class="timestamp">
+	    		vor <%= time_ago_in_words(post.created_at) %>.
+	  		</span>  
+	  	  </li>
+	  	<% end %>
+      </ol>
+    <% end %>
