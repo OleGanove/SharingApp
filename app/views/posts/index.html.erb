@@ -1,5 +1,8 @@
 <% @posts.each do |post| %>
+  <% preview = LinkThumbnailer.generate(post.link) %>
   <h1><%= link_to post.title, post %></h1>
   <p><%= post.description %></p>
-  <p><%= post.link %></p>
+  <p><%= image_tag preview.images.first.src.to_s %></p>
+  <p><%= preview.title %></p>
+  <p><%= preview.description %></p>
 <% end %>

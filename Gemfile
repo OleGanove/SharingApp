@@ -12,6 +12,7 @@ gem 'jbuilder',     '2.4.1'
 gem 'bootstrap-sass', '3.3.6'
 gem 'jquery-turbolinks'
 gem 'devise-i18n-views'
+gem 'link_thumbnailer'
 
 
 group :development, :test do
