@@ -1,8 +1,68 @@
-<% @posts.each do |post| %>
-  <% preview = LinkThumbnailer.generate(post.link) %>
-  <h1><%= link_to post.title, post %></h1>
-  <p><%= post.description %></p>
-  <p><%= image_tag preview.images.first.src.to_s %></p>
-  <p><%= preview.title %></p>
-  <p><%= preview.description %></p>
-<% end %>
+<div class="chat">
+
+  <div class="bubble attachment">
+    <%= image_tag "image_icon.svg", class: "icon" %>
+    <div class="preview">
+      <%= image_tag "pixel-perfect-design-resources.png" %>	
+    </div>
+    <div class="content">
+      <h2 class="title">Dies ist die Vorschau des Links</h2>
+      <p class="description">Dies sollte die Vorschau werden, für den Link, den Thumbnailer herauskristallisiert. Mal schauen, wie es später dann tatsächlich aussehen wird, oh oh.</p>
+      <div class="buttons_wrapper">
+      	<a class="button button_blue" href="#">Zum Artikel</a>
+      	<a class="button button_download" href="#">Download</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bubble">
+    <div class="content">
+      <div class="avatar">
+        <%= image_tag "avatar.png" %>
+      </div>
+      <p class="copy">
+      	Hallo, das ist eine Beschreibung zu einem wunderbaren Link.
+      </p>
+    </div>
+    <p class="time">10:34 Uhr</p>
+  </div>
+
+  <div class="bubble">
+    <div class="content">
+      <div class="avatar">
+        <%= image_tag "avatar.png" %>
+      </div>
+      <p class="copy">
+      	Hallo, das ist eine Beschreibung zu einem wunderbaren Link. Dies ist dann auch ein etwas anderer Text, der ein wenig länger ist. Sollte ich das so lassen? Dann müsste ich display: inline-block ausstellen im CSS.
+      </p>
+    </div>
+    <p class="time">10:34 Uhr</p>
+  </div>
+
+  <div class="bubble client">
+    <div class="content">
+      <div class="avatar">
+        <%= image_tag "avatar_client.png" %>
+      </div>
+      <p class="copy">
+      	Ich bin ein Kommentar von draußen, aber sollte ich Kommentare nicht lieber ganz abstellen? Mhhh. 
+      </p>
+    </div>
+    <p class="time">10:34 Uhr</p>
+  </div>
+
+  <div class="bubble">
+    <div class="content">
+      <div class="avatar">
+        <%= image_tag "avatar.png" %>
+      </div>
+      <p class="copy">
+      	Hallo, das ist eine Beschreibung zu einem wunderbaren Link.
+      </p>
+    </div>
+    <p class="time">10:34 Uhr</p>
+  </div>
+
+</div>
+
+
