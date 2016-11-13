@@ -10,6 +10,8 @@ $copy: #727678;
 $highlight: #71B280;
 $gray-medium-light: #eaeaea;
 $white: white;
+$error: red;
+
 /* universal */
 
 /* homepage */
@@ -82,7 +84,7 @@ section {
 }
 
 textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .center {
@@ -101,6 +103,28 @@ textarea {
   padding-left: 0;
 }
 
+/* Bootstrap Flash*/
+.alert {
+  margin-top: -1em;
+  text-align: center;
+}
+
+/* Fehlermeldungen */
+.error {
+  color: $error;
+  list-style-type: none;
+  float: left;
+  margin-top: -1.5em;
+  font-size: 0.95em;
+}
+
+#error_explanation {
+  color: $error;
+  list-style-type: none;
+  float: left;
+  margin-top: -1.5em;
+  font-size: 0.95em;
+}
 
 /* Sidebar */
 
@@ -285,13 +309,14 @@ input[type="checkbox"]{
     clear: both;
     .preview {
       width: 15em;
-      height: 21.7em;
+      height: 18em;
       border-radius: .5em;
       overflow: hidden;
       box-shadow: 0px 9px 30px 0px rgba(44, 55, 79, 0.34);
       position: absolute;
       left: 2.3em;
       bottom: 2.3em;
+      top: 2em;
       img {
         position: absolute;
         left: 50%;
@@ -316,6 +341,7 @@ input[type="checkbox"]{
         font-size: 1.75em;
         color: $main;
         font-weight: 400;
+        margin: 0 1em 1em 0;
       }
       .description {
         font-size: 1.1em;
@@ -323,7 +349,7 @@ input[type="checkbox"]{
         line-height: 1.65;
       }
       .buttons_wrapper {
-        margin-top: 3em;
+        margin-top: 2.2em;
         .btn{
           margin-right: 1em;
         }

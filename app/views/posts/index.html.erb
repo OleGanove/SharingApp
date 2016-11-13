@@ -9,11 +9,11 @@
       <div class="bubble linkpreview">
         <%= image_tag "image_icon.svg", class: "icon" %>  
         <div class="preview">
-          <%= image_tag preview.images.first.src.to_s %> 
+          <%= link_to(image_tag(preview.images.first.src.to_s), post.link) %> 
         </div>   
         <div class="content">
           <h2 class="title"><%= preview.title %></h2>
-          <p class="description"><%= preview.description %></p>
+          <p class="description"><%=  preview.description %></p>
           <div class="buttons_wrapper">
             <%= link_to "Zum Artikel", post.link, target: "_blank", class: "btn btn-primary" %>
           </div>
@@ -25,7 +25,7 @@
           <div class="avatar">
             <%= image_tag "avatar.png" %>
           </div>
-          <p class="copy"><span class="kurator">Kurator <%= post.user.email %> sagt:</span> <%= post.description %></p>
+          <p class="copy"><span class="kurator">Kurator <%= post.user.username %> sagt:</span> <%= post.description %></p>
         </div>
         <p class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></p>
       </div>

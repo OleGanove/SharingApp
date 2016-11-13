@@ -1,24 +1,24 @@
 <div class="forms new-post">
 <%= form_for @post do |f| %>
-  <% if @post.errors.any? %>
-    <h2><%= pluralize(@post.errors.count, "Fehler") %></h2>
-    <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  <% end %>
 
   <%= f.label :link, "Link" %><br>
-  <%= f.text_field :link %>
+  <% if @post.errors[:link] %>
+      <% @post.errors[:link].each do |msg| %>
+        <p class="error">*<%= msg %></p>
+     <% end %>
+  <% end %>
+  <%= f.text_field :link, class: "form-control"%>
+
 
   <%= f.label :description, "Kommentiere deinen Link" %><br>
-  <%= f.text_area :description %>
+  <% if @post.errors[:description] %>
+      <% @post.errors[:description].each do |msg| %>
+        <p class="error">*<%= msg %></p>
+      <% end %>
+  <% end %>
+  <%= f.text_area :description, class: "form-control" %>
 
   <br>
-
-
-
 
   <%= f.submit class: "btn btn-primary" %>
 

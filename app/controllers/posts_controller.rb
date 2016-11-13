@@ -1,14 +1,11 @@
 
 class PostsController < ApplicationController
   # Hier noch before_action authenticate_user? 
-  before_action :find_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_post, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @posts = Post.all
-  end
-
-  def show
   end
 
   def new
@@ -19,7 +16,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to @post, notice: "Dein Beitrag wurde erfolgreich gespeichert."
+      redirect_to posts_path, notice: "Dein Beitrag wurde erfolgreich gespeichert."
     else
       render 'new', notice: "Leider konnte dein Beitrag nicht gespeichert werden."
     end

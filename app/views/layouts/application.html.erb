@@ -18,7 +18,7 @@
   <% else %>
     <body>
       <%= render 'layouts/header' %>
-      <%= render 'layouts/flash' %>
+      <%= render partial: "layouts/flash", flash: flash %> 
 
       <div class="container">
         <%= yield %>
