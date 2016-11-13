@@ -7,56 +7,74 @@ $main: #393f42;
 $secondary: #cedce4;
 $background: #f7f8fb;
 $copy: #727678;
-$highlight: #50bbf2;
+$highlight: #71B280;
 $gray-medium-light: #eaeaea;
 $white: white;
 /* universal */
 
 /* homepage */
 .body_home {
-  background: {
-    color: $background;
-    image: asset-url("background_house.jpg");
-    size: 100%;
-    repeat: no-repeat;
-  };
+
+  background: #134E5E; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #134E5E , #71B280); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #134E5E , #71B280); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */      
+
 
   div {
     margin-top:10em;
   }
 }
 
+.landing_buttons {
+  margin-top: 3em !important;
+}
+
 body {
   padding-top: 60px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Nunito", sans-serif;
   background: $background;
 }
 
-.button {
+.btn {
   padding: 1em 1.5em;
   border-radius: .35em;
+  border-color: none;
   text-decoration: none;
   font-weight: 700;
   font-size: .9em;
-  transition: background .4s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
-.button_blue {
+.btn-primary {
+  border-color: $highlight;
   background: $highlight;
   color: $white;
   &:hover {
     background: darken($highlight, 20%);
+    border-color: darken($highlight, 20%);
     text-decoration: none;
   };
 }
 
-.button_download {
+.btn-secondary{
   background: $secondary;
   color: $white;
   &:hover {
     background: darken($secondary, 20%);
     text-decoration: none;
   };
+}
+
+.btn-left {
+  margin-right: 1.2em;
+  background: none;
+}
+
+.btn-right {
+  &:hover {
+    background: lighten($white, 20%);
+    color: $main;
+  }
 }
 
 section {
@@ -74,8 +92,123 @@ textarea {
   }
 }
 
+/* Bootstrap columns*/
+.col-md-3{
+  padding-left: 0;
+}
+
+.col-md-9{
+  padding-left: 0;
+}
+
+
+/* Sidebar */
+
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  width: 16%;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+
+  .avatar_info{
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+    }    
+  }
+
+}
+
+.avatar_info{
+  margin-top: 3.4em;
+}
+
+.others {
+  .other_avatars{
+    img{
+      height:50px;
+      width: 50px;
+      margin: 0.5em 0.5em 0.5em 0;
+      border-radius:100%;
+    }
+  }
+}
+.sidebar-nav {
+  list-style: none;
+}
+
+@media (max-width:767px) {
+
+    #wrapper {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      left: 0;
+
+      hr {
+        width: 2em;
+        height: 0;
+        border-top: 2px solid $main;
+        margin: 3em 0;
+      }
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
+}
+
+/* Forms */
+.forms {
+  width: 40%;
+  background: $white;
+  box-shadow: 0px 9px 30px 0px rgba(44,55,79,0.07);
+  border-radius: 25px 25px 25px 25px; 
+  margin: 0 auto;
+  margin-top: 8em;
+  padding: 1em 2em 2em 2em;
+  h2{
+    text-align: left;
+  }
+  input {
+    width: 100%;
+    margin-bottom: 2em;
+  }
+
+  textarea{
+    width: 100%;
+    margin-bottom: 2em;
+    height: 10em;
+  }
+}
+
+input[type="checkbox"]{
+  width: 0;
+}
+
+.edit-profile, .new-post{
+  margin-top: 3em;
+}
+
 /* Posts Design*/
-.chat {
+.posts {
   width: 800px;
   height: 100%;
   margin: 0 auto;
@@ -110,6 +243,14 @@ textarea {
         color: $copy;
         padding: 1.5em;
         margin: 0;
+        .kurator{
+          text-weight: 700;
+          color: $main;
+        }
+
+      }
+      .title {
+        text-align: left;
       }
     }
     .time {
@@ -137,21 +278,34 @@ textarea {
     }
   }
 
-  .bubble.attachment{
+  .bubble.linkpreview{
     width: 100%;
     position: relative;
     margin: 5em 0 2em 0 ;
     clear: both;
     .preview {
       width: 15em;
+      height: 21.7em;
       border-radius: .5em;
       overflow: hidden;
       box-shadow: 0px 9px 30px 0px rgba(44, 55, 79, 0.34);
       position: absolute;
-      left: 2em;
-      bottom: 2em;
+      left: 2.3em;
+      bottom: 2.3em;
       img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        height: 100%;
+        width: auto;
+        -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+                transform: translate(-50%,-50%);        
+      }
+
+      img.portrait{
         width: 100%;
+        height: auto;
       }
     }
     .content {
@@ -170,7 +324,7 @@ textarea {
       }
       .buttons_wrapper {
         margin-top: 3em;
-        .button{
+        .btn{
           margin-right: 1em;
         }
       }
@@ -206,28 +360,58 @@ h2 {
 }
 
 p {
-  font-size: 1.5em;
+  font-size: 1em;
   line-height: 1.7em;
 }
 
+a {
+  transition: all .4s ease-in-out;
+}
+
 .home-font {
+  font-family: "Pacifico", cursive;
   color: $white;
 }
-/* header */
 
-#logo {
+.subtitle {
+  color: $white;
+}
+
+/* header */
+.navbar {
+  background: #134E5E; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #134E5E , #71B280); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #134E5E , #71B280); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */      
+  border: none;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: $white;
+  &:hover {
+    color: darken($white, 30%);
+  }
+}
+
+.logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
-  text-transform: uppercase;
+  color: $white;
   letter-spacing: -1px;
   padding-top: 9px;
-  font-weight: bold;
+  font-family: 'Pacifico', cursive;
+  transition: all .4s ease-in-out;
   &:hover {
-    color: white;
+    color: darken($white, 30%);
     text-decoration: none;
   }
+}
+
+
+/* Icons */
+.logo-paper-plane{
+  font-size: 4em !important;
+  color: $white;
 }
 
 /* footer */
@@ -262,3 +446,4 @@ footer {
 
 @import "normalize";
 @import "home";
+@import "font-awesome";
