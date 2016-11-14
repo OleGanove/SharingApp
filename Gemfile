@@ -13,7 +13,7 @@ gem 'bootstrap-sass', '3.3.6'
 gem 'jquery-turbolinks'
 gem 'devise-i18n-views'
 gem 'link_thumbnailer'
-gem 'font-awesome-rails'
+
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'

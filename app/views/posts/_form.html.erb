@@ -1,26 +1,31 @@
-<div class="forms new-post">
 <%= form_for @post do |f| %>
-
-  <%= f.label :link, "Link" %><br>
-  <% if @post.errors[:link] %>
-      <% @post.errors[:link].each do |msg| %>
-        <p class="error">*<%= msg %></p>
-     <% end %>
+  <% if @post.errors.any? %>
+  	<h2><%= pluralize(@post.errors.count, "Fehler") %></h2>
+  	<ul>
+  	  <% @post.errors.full_messages.each do |msg| %>
+  	  	<li><%= msg %></li>
+  	  <% end %>
+  	</ul>
   <% end %>
-  <%= f.text_field :link, class: "form-control"%>
 
-
-  <%= f.label :description, "Kommentiere deinen Link" %><br>
-  <% if @post.errors[:description] %>
-      <% @post.errors[:description].each do |msg| %>
-        <p class="error">*<%= msg %></p>
-      <% end %>
-  <% end %>
-  <%= f.text_area :description, class: "form-control" %>
+  <%= f.label :title, "Titel" %><br>
+  <%= f.text_field :title %>
 
   <br>
+  <br>
 
-  <%= f.submit class: "btn btn-primary" %>
+  <%= f.label :description, "Beschreibung" %><br>
+  <%= f.text_area :description %>
+
+  <br>
+  <br>
+
+  <%= f.label :link, "Link" %><br>
+  <%= f.text_field :link %>
+
+  <br>
+  <br>
+
+  <%= f.submit %>
 
 <% end %>
-</div>

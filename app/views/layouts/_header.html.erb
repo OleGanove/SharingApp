@@ -1,13 +1,12 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <%= link_to "Sharit", root_path, class: "logo" %>
+        <%= link_to "Sharit", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-              <li><%= link_to "Alle Beiträge", posts_path %></li>
+              <li>Hallo <%= current_user.email %></li>
               <li><%= link_to "Neuer Beitrag", new_post_path %></li>
-              <li><%= link_to "Meine Beiträge", current_user %></li>
-              <li><%= link_to 'Einstellungen', edit_user_registration_path %></li>
+              <li><%= link_to 'Profil', edit_user_registration_path %></li>
               <li><%= link_to 'Ausloggen', destroy_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to 'Einloggen', new_user_session_path %></li>

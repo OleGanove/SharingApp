@@ -1,20 +1,12 @@
 <% provide(:title, "Sharify") %>
 
 
+
 <div class="col-md-12 text-center start">
-	<i class="fa fa-paper-plane logo-paper-plane" aria-hidden="true"></i>
-	<h1 class="home-font">	
-	  Willkommen auf Sharit
-	</h1>
-	<h2 class="text-center subtitle">Kuratiere deine Netzfundstücke</h2>
-
-	<div class="landing_buttons">
-		<%= link_to "Anmelden", new_user_session_path, class: "btn btn btn-secondary btn-lg btn-left" %>
-		<%= link_to "Registrieren", new_user_registration_path, class: "btn btn-primary btn-lg btn-right" %>
-	</div>
-
+	<h1 class="home-font">Willkommen auf Sharit</h1>
+	<h2 class="text-center home-font">Kuratiere deine Netzfundstücke</h2>
+	<%= link_to "Anmelden", new_user_session_path, class: "btn btn btn-secondary btn-lg" %>
+    <%= link_to "Registrieren", new_user_registration_path, class: "btn btn-primary btn-lg" %>
 </div>
-
-
 
 

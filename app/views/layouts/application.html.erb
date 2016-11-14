@@ -7,8 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all',
                                               'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300">
     <%= render 'layouts/shim' %>
   </head>
   
@@ -18,10 +17,11 @@
   <% else %>
     <body>
       <%= render 'layouts/header' %>
-      <%= render partial: "layouts/flash", flash: flash %> 
+      <%= render 'layouts/flash' %>
 
       <div class="container">
         <%= yield %>
+        <%= render 'layouts/footer' %>
       </div>
   <% end %>
     </body>
