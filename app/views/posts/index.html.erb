@@ -7,11 +7,15 @@
     <% @posts.each do |post| %>
       <% preview = LinkThumbnailer.generate(post.link) %>
       <div class="bubble linkpreview">
-        <%= image_tag "image_icon.svg", class: "icon" %>  
+        <% if post.pinned %>
+          <i class="fa fa-thumb-tack icon" aria-hidden="true"></i>
+        <% else %>
+          <%= image_tag "image_icon.svg", class: "icon" %>  
+        <% end %>
         <div class="preview">
           <%= link_to(image_tag(preview.images.first.src.to_s), post.link) %> 
         </div>   
-        <div class="content">
+        <div class="content content-<%=post.pinned%>">
           <h2 class="title"><%= preview.title %></h2>
           <p class="description"><%=  preview.description %></p>
           <div class="buttons_wrapper">
@@ -21,7 +25,7 @@
       </div>
 
       <div class="bubble">
-        <div class="content">
+        <div class="content content-<%=post.pinned%>">
           <div class="avatar">
             <%= image_tag "avatar.png" %>
           </div>

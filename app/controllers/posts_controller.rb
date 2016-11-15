@@ -3,9 +3,10 @@ class PostsController < ApplicationController
   # Hier noch before_action authenticate_user? 
   before_action :find_post, only: [:edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all
+    @posts = Post.order('pinned desc, created_at desc')
   end
 
   def new
@@ -42,11 +43,18 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :link)
+    params.require(:post).permit(:pinned, :description, :link)
   end
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def post_owner
+    unless @post.user_id == current_user.id 
+      flash[:notice] = "Tut mir Leid, aber du kannst nur deine eigenen Beiträge editieren."
+      redirect_to posts_path
+    end
   end
 
 end

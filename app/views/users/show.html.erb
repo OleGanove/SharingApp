@@ -9,21 +9,28 @@
 	    <% @user.posts.each do |post| %>
 	      <% preview = LinkThumbnailer.generate(post.link) %>
 	      <div class="bubble linkpreview">
-	        <%= image_tag "image_icon.svg", class: "icon" %>  
+	        <% if post.pinned %>
+	          <i class="fa fa-thumb-tack icon" aria-hidden="true"></i>
+	        <% else %>
+	          <%= image_tag "image_icon.svg", class: "icon" %>  
+	        <% end %>
 	        <div class="preview">
 	          <%= image_tag preview.images.first.src.to_s %> 
 	        </div>   
-	        <div class="content">
+	        <div class="content content-<%=post.pinned%>">
 	          <h2 class="title"><%= preview.title %></h2>
 	          <p class="description"><%= preview.description %></p>
 	          <div class="buttons_wrapper">
 	            <%= link_to "Zum Artikel", post.link, target: "_blank", class: "btn btn-primary" %>
+	            <% if post.user_id == current_user %>
+	              <%= link_to "Editieren", edit_post_path(post) %>
+	            <% end %>
 	          </div>
 	        </div>       
 	      </div>
 
 	      <div class="bubble">
-	        <div class="content">
+	        <div class="content content-<%=post.pinned%>">
 	          <div class="avatar">
 	            <%= image_tag "avatar.png" %>
 	          </div>

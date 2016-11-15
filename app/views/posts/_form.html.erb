@@ -18,7 +18,9 @@
   <% end %>
   <%= f.text_area :description, class: "form-control" %>
 
-  <br>
+  <%= f.check_box :pinned %>
+  <%= f.label "Beitrag oben anpinnen?" %>
+
 
   <%= f.submit class: "btn btn-primary" %>
 
