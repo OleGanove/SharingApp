@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113212156) do
+ActiveRecord::Schema.define(version: 20161115142210) do
 
   create_table "participants", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20161113212156) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.text     "title"
     t.text     "description"
     t.text     "link"
     t.integer  "user_id"
