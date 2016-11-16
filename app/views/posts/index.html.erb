@@ -5,34 +5,7 @@
 <div class="col-md-9">
   <div class="posts">
     <% @posts.each do |post| %>
-      <% preview = LinkThumbnailer.generate(post.link) %>
-      <div class="bubble linkpreview">
-        <% if post.pinned %>
-          <i class="fa fa-thumb-tack icon" aria-hidden="true"></i>
-        <% else %>
-          <%= image_tag "image_icon.svg", class: "icon" %>  
-        <% end %>
-        <div class="preview">
-          <%= link_to(image_tag(preview.images.first.src.to_s), post.link) %> 
-        </div>   
-        <div class="content content-<%=post.pinned%>">
-          <h2 class="title"><%= preview.title %></h2>
-          <p class="description"><%=  preview.description %></p>
-          <div class="buttons_wrapper">
-            <%= link_to "Zum Artikel", post.link, target: "_blank", class: "btn btn-primary" %>
-          </div>
-        </div>       
-      </div>
-
-      <div class="bubble">
-        <div class="content content-<%=post.pinned%>">
-          <div class="avatar">
-            <%= image_tag "avatar.png" %>
-          </div>
-          <p class="copy"><span class="kurator">Kurator <%= post.user.username %> sagt:</span> <%= post.description %></p>
-        </div>
-        <p class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></p>
-      </div>
+      <%= render :partial => "layouts/preview-bubble", :locals => {:post => post} %>
     <% end %>
   </div>
 </div>
