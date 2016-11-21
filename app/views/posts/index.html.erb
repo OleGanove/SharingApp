@@ -1,13 +1,10 @@
-<div class="col-md-3">
-  <%= render 'layouts/sidebar' %>
-</div>
 
-<div class="col-md-9">
-  <div class="posts">
-    <% @posts.each do |post| %>
-      <%= render :partial => "layouts/preview-bubble", :locals => {:post => post} %>
-    <% end %>
-  </div>
-</div>
+<% @posts.in_groups_of(3).each do |post_array| %>
+  <% post_array.each_with_index do |post, index| %>
+    <div class="col-md-4">
+      <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>  
+    </div>
+  <% end %>
+<% end %>
 
 

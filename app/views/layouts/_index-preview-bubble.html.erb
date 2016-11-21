@@ -1,0 +1,21 @@
+<% if post %>
+	<% preview = LinkThumbnailer.generate(post.link) %>
+
+	  <div class="index-preview">
+	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
+		<div class="image-text">
+		  <%= link_to(image_tag(preview.images.first.src.to_s), post.link, target: "_blank") %> 
+		  <h4 class="text"><%= link_to preview.title, post.link %></h4>
+		</div>
+
+	    <div class="comment">
+    	  <div class="avatar">
+		    <%= image_tag "avatar.png" %>
+		  </div>
+		  <p class="curator-comment">
+		    Kurator <%= post.user.username %> sagt: <%= post.description %>
+		  </p>
+		</div>
+	  </div> 
+
+<% end %>
