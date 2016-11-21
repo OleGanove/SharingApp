@@ -17,5 +17,6 @@
 		  </p>
 		</div>
 	  </div> 
-
+	  
+	  <p class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></p>
 <% end %>

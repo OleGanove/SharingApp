@@ -4,13 +4,13 @@
 </div>
 
 <div class="col-md-9">
-  <div class="posts">
+
     <% if @user.posts.any? %>
 	    <% @user.posts.each do |post| %>
-      		<%= render :partial => "layouts/preview-bubble", :locals => {:post => post} %>
+      		<%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>
 	    <% end %>
     <% else %>
     	<h3><%= @user.username %> hat leider noch keine Beiträge geteilt.</h3>
     <% end %>
-  </div>
+
 </div>
