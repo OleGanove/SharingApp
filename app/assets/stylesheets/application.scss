@@ -12,7 +12,7 @@ $highlight: #71B280;
 $gray-medium-light: #eaeaea;
 $white: white;
 $error: red;
-
+$dark-grey: #3B362A;
 /* universal */
 
 /* homepage */
@@ -36,6 +36,10 @@ body {
   padding-top: 60px;
   font-family: "Lato", sans-serif;
   background: $background;
+}
+
+.main-content {
+  min-height: 100%;
 }
 
 .btn {
@@ -135,11 +139,13 @@ textarea {
 }
 
 #sidebar-wrapper {
+  /*
   width: 16%;
   position: fixed;
   height: 100%;
   overflow-y: auto;
   z-index: 1000;
+  */
   transition: all 0.4s ease 0s;
 
   .avatar_info{
@@ -149,7 +155,6 @@ textarea {
       border-radius: 100%;
     }    
   }
-
 }
 
 .avatar_info{
@@ -232,142 +237,6 @@ input[type="checkbox"]{
   margin-top: 3em;
 }
 
-/* Posts Design*/
-.posts {
-  width: 800px;
-  height: 100%;
-  margin: 0 auto;
-  .bubble {
-    margin-bottom: 3em;
-
-    .content{
-      background: $white;
-      box-shadow: 0px 9px 30px 0px rgba(44,55,79,0.07);
-      border-radius: 25px 25px 25px 2px;
-      display: inline-block;
-      &::before, &::after {
-        content: "";
-        display: table;
-      }
-      &::after{
-        clear:both;
-      }
-      .avatar {
-        width: 40px;
-        height: 40px;
-        border-radius: 100%;
-        overflow: hidden;
-        float: left;
-        margin: 2em;
-        img {
-          height: 100%;
-        }
-      }
-      .copy{
-        font-size: 1.1em;
-        line-height: 1.75;
-        color: $copy;
-        padding: 1.5em;
-        margin: 0;
-        .kurator{
-          text-weight: 700;
-          color: $main;
-        }
-
-      }
-      .title {
-        text-align: left;
-      }
-    }
-    .content-true {
-      background: $pinned;
-    }
-    .time {
-      font-weight: 700;
-      font-size: .8em;
-      clear: both;
-      color: $main;
-      margin-top: 1em;
-    }
-  }
-  
-  .bubble.client {
-    float: right;
-    .content {
-      background: #fafbff;
-      border-radius: 25px 25px 2px 25px;
-      text-align: right;
-      float:right;
-      .avatar {
-        float: right;
-      }
-    }
-    .time{
-      float: right;
-    }
-  }
-
-  .bubble.linkpreview{
-    width: 100%;
-    position: relative;
-    margin: 5em 0 2em 0 ;
-    clear: both;
-    .preview {
-      width: 15em;
-      height: 18em;
-      border-radius: .5em;
-      overflow: hidden;
-      box-shadow: 0px 9px 30px 0px rgba(44, 55, 79, 0.34);
-      position: absolute;
-      left: 2.3em;
-      bottom: 2.3em;
-      top: 2em;
-      img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        height: 100%;
-        width: auto;
-        -webkit-transform: translate(-50%,-50%);
-            -ms-transform: translate(-50%,-50%);
-                transform: translate(-50%,-50%);        
-      }
-
-      img.portrait{
-        width: 100%;
-        height: auto;
-      }
-    }
-    .content {
-      width: 100%;
-      min-height: 22em;
-      padding: 2em 5em 2em 20em;
-      .title {
-        font-size: 1.75em;
-        color: $main;
-        font-weight: 400;
-        margin: 0 1em 1em 0;
-      }
-      .description {
-        font-size: 1.1em;
-        color: $copy;
-        line-height: 1.65;
-      }
-      .buttons_wrapper {
-        margin-top: 2.2em;
-        .btn{
-          margin-right: 1em;
-        }
-      }
-    }
-    .icon {
-      position: absolute;
-      right: 2em;
-      top: 2em;
-    }
-  }
-}
-
 
 /* Index Übersicht der Posts */
 
@@ -397,7 +266,7 @@ input[type="checkbox"]{
       transition: background 1s;
       padding: 0.5em;
       line-height: 1.3em;
-      bottom: -0.5em;
+      bottom: -0.6em;
       font-family: 'Lato', sans-serif;
       font-weight: 900;
       font-style: normal;
@@ -534,15 +403,20 @@ a {
 /* footer */
 
 footer {
+  background: $dark-grey;
+  min-height: 100px;
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
+  color: $white;
   a {
-    color: $gray;
+    color: $white;
     &:hover {
-      color: $gray-darker;
+      color: darken($highlight, 20%);
     }
+  }
+  .container {
+    margin-top: 2.5em;
   }
   small {
     float: left;
@@ -557,7 +431,9 @@ footer {
   }
 }
 
-
+.static-info{
+  margin-top: 3em;
+}
 
 
 

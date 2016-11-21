@@ -21,9 +21,10 @@
       <%= render 'layouts/header' %>
       <%= render partial: "layouts/flash", flash: flash %> 
 
-      <div class="container">
+      <div class="container main-content">
         <%= yield %>
       </div>
   <% end %>
+      <%= render 'layouts/footer' %>
     </body>
 </html>

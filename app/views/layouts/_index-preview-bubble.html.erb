@@ -5,7 +5,7 @@
 	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
 		<div class="image-text">
 		  <%= link_to(image_tag(preview.images.first.src.to_s), post.link, target: "_blank") %> 
-		  <h4 class="text"><%= link_to preview.title, post.link %></h4>
+		  <h4 class="text"><%= link_to preview.title, post.link, target: "_blank" %></h4>
 		</div>
 
 	    <div class="comment">
