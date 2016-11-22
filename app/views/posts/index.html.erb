@@ -1,3 +1,20 @@
+<div class="info col-md-6">
+	<h2>Angepinnte Beiträge</h2>
+	<p>
+		Hier findest du die Créme de la Créme. Artikel, die von unseren Kuratoren als sehr lesenswert eingeschätzt und angepinnt wurden. 
+	</p>
+</div>
+
+
+<%= render "layouts/carousel" %>
+
+<hr> 
+
+
+<div class="info col-md-12">
+	<h2>Alle Beiträge</h2>
+</div>
+
 <% @posts.in_groups_of(3).each do |post_array| %>
   <% post_array.each_with_index do |post, index| %>
     <div class="col-md-4">
