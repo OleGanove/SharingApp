@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
 
-  # Important for randomization
+  # Probanden in eine von vier Untersuchungsbedingungen einteilen
   def set_group_belonging
     self.group = self.id % 4
   end
@@ -29,3 +29,5 @@ class User < ApplicationRecord
     end
   end  
 end
+
+
