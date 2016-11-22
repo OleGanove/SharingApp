@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  after_commit :set_group_belonging
   attr_accessor :login
   has_many :posts, dependent: :destroy
   devise :database_authenticatable, :registerable,
@@ -11,6 +13,12 @@ class User < ApplicationRecord
   validates :username, :presence => true,
                        :uniqueness => { :case_sensitive => false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+
+
+  # Important for randomization
+  def set_group_belonging
+    self.group = self.id % 4
+  end
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
