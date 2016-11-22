@@ -1,0 +1,24 @@
+<div class="statistics">
+  <div class="container">
+      <div class="col-md-4 personal">
+        <%= image_tag "avatar.png" %>
+        <div class="personal-stats">
+      		<h4>Hallo <%= current_user.username %>!</h4>
+     		<p>Beiträge: <%= current_user.posts.size %></p>
+     		<p>Angepinnte Beiträge: <%= current_user.posts.where(pinned: true).size %></p>
+        </div>
+
+      </div>
+
+      <div class="col-md-4 statistics-icon">
+
+      </div>
+
+      <div class="col-md-4 sharit-stats">
+      	<h4>Wusstest du, dass Sharit wächst?</h4>
+     	<p>Kuratoren: 16</p>
+     	<p>Leser: 412</p>
+      </div>
+
+  </div>
+</div>

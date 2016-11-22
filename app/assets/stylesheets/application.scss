@@ -455,8 +455,50 @@ footer {
 }
 
 
+/* Dashboard Header*/
 
+.statistics{
+  background: $dark-grey;
+  color: $white;
+  margin-top: -10px;
+  margin-bottom: 1.5em;
+  .container {
+    p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
 
+    h4 {
+      margin-bottom: 0.3em;
+    }
+
+    .col-md-4 {
+      padding: 10;
+      margin-bottom: 0.5em;
+    }
+
+    .personal {
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        float: left;
+        margin-top: 1.5em;
+      }
+      .personal-stats{
+        margin-left: 4.5em;
+      }
+    }
+
+    .sharit-stats{
+      text-align: right;
+    }
+  }
+}
+
+.alert {
+  margin-bottom: 0;
+}
 @import "normalize";
 @import "home";
 @import "font-awesome";
