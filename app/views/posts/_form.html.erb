@@ -18,6 +18,12 @@
   <% end %>
   <%= f.text_area :description, class: "form-control" %>
 
+
+  <% if @post.errors[:pinned] %>
+      <% @post.errors[:pinned].each do |msg| %>
+        <p class="error">*<%= msg %></p>
+      <% end %>
+  <% end %>
   <%= f.check_box :pinned %>
   <%= f.label "Beitrag oben anpinnen?" %>
 

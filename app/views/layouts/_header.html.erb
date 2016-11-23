@@ -32,14 +32,14 @@
                   <li class="divider"></li>
 
                   <li>
-                    <%= link_to destroy_user_session_path, class: "logout", method: :delete do %>
+                    <%= link_to destroy_user_session_path, method: :delete do %>
                       <span class="fa fa-sign-out" aria-hidden="true"></span>  Ausloggen
                     <% end %>
                   </li>
                 </ul>
               </li>
               <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= link_to destroy_user_session_path, class: "logout", method: :delete do %>
                   <span class="fa fa-sign-out" aria-hidden="true"></span>  Ausloggen
                 <% end %>
               </li>
