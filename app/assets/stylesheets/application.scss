@@ -128,7 +128,6 @@ textarea {
   color: $error;
   list-style-type: none;
   float: left;
-  margin-top: -1.5em;
   font-size: 0.95em;
 }
 
@@ -240,6 +239,8 @@ textarea {
 input[type="checkbox"]{
   width: 0;
 }
+
+
 
 .edit-profile, .new-post{
   margin-top: 3em;
