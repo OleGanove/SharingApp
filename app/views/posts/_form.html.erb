@@ -1,35 +1,40 @@
-<div class="forms new-post">
-<%= form_for @post do |f| %>
+<div class="center-vertically">
+  <div class="forms new-post">
+  <%= form_for @post do |f| %>
 
-  <%= f.label :link, "Link" %><br>
-  <% if @post.errors[:link] %>
-      <% @post.errors[:link].each do |msg| %>
-        <p class="error">*<%= msg %></p>
-     <% end %>
+    <%= f.label :link, "Link" %><br>
+    <% if @post.errors[:link] %>
+        <% @post.errors[:link].each do |msg| %>
+          <p class="error">*<%= msg %></p>
+       <% end %>
+    <% end %>
+    <%= f.text_field :link, class: "form-control"%>
+
+
+    <%= f.label :description, "Kommentiere deinen Link" %><br>
+    <% if @post.errors[:description] %>
+        <% @post.errors[:description].each do |msg| %>
+          <p class="error">*<%= msg %></p>
+        <% end %>
+    <% end %>
+    <%= f.text_area :description, class: "form-control" %>
+
+
+    <%= f.check_box :pinned, class: "left" %>
+    <%= f.label "Beitrag oben anpinnen?" %>
+    <% if @post.errors[:pinned] %>
+        <% @post.errors[:pinned].each do |msg| %>
+          <p class="error">*<%= msg %></p>
+        <% end %>
+        <br>
+    <% end %>
+
+    <%= f.submit class: "btn btn-primary" %>
+
   <% end %>
-  <%= f.text_field :link, class: "form-control"%>
-
-
-  <%= f.label :description, "Kommentiere deinen Link" %><br>
-  <% if @post.errors[:description] %>
-      <% @post.errors[:description].each do |msg| %>
-        <p class="error">*<%= msg %></p>
-      <% end %>
-  <% end %>
-  <%= f.text_area :description, class: "form-control" %>
-
-
-
-  <%= f.check_box :pinned, class: "left" %>
-  <%= f.label "Beitrag oben anpinnen?" %>
-  <% if @post.errors[:pinned] %>
-      <% @post.errors[:pinned].each do |msg| %>
-        <p class="error">*<%= msg %></p>
-      <% end %>
-      <br>
-  <% end %>
-
-  <%= f.submit class: "btn btn-primary" %>
-
-<% end %>
+  </div>
 </div>
+
+
+
+
