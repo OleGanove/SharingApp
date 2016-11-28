@@ -15,6 +15,7 @@ gem 'devise-i18n-views'
 gem 'link_thumbnailer'
 gem 'font-awesome-rails'
 gem 'owlcarousel-rails'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'sqlite3', '1.3.11'
