@@ -21,9 +21,11 @@
 	  <div class="time-and-likes">
 	  	<div class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
 	  	<div class="likes">
-	  		<%= post.likes.size %>
-	  		<%= link_to upvote_post_path(post), method: :post do %>
-	  		  <i class="fa fa-heart" aria-hidden="true"></i>	
+	  		<span class="like-<%=post.id%>"> 
+	  		  <%= post.likes.count %>
+	  		</span>
+	  		<%= link_to upvote_post_path(post), method: :post, class: "heart", remote: true do %>
+	  		  <i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
 	  		<% end %>
 	  	</div>
 	  </div>

@@ -41,10 +41,13 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    if @post.likes.create(user_id: current_user.id)
-      redirect_to posts_path
-    else
-      redirect_to posts_path
+    # Hier müsste ich zwei neue Fake-Like-Counts einfügen
+    # Je nachdem, in welcher Gruppe ich bin, wird ein anderer count erhöht.
+     
+    @post.likes.create(user_id: current_user.id)
+
+    respond_to do |format|
+      format.js
     end
   end
 
