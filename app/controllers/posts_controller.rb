@@ -1,7 +1,7 @@
 
 class PostsController < ApplicationController
   # Hier noch before_action authenticate_user? 
-  before_action :find_post, only: [:edit, :update, :destroy]
+  before_action :find_post, only: [:edit, :update, :destroy, :upvote]
   before_action :authenticate_user!
   before_action :post_owner, only: [:edit, :update, :destroy]
 
@@ -40,6 +40,13 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def upvote
+    if @post.likes.create(user_id: current_user.id)
+      redirect_to posts_path
+    else
+      redirect_to posts_path
+    end
+  end
 
   private
 

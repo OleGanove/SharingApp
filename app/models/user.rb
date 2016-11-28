@@ -4,7 +4,10 @@ class User < ApplicationRecord
 
   after_commit :set_group_belonging
   attr_accessor :login
+  
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :upvoted_posts, through: :likes, source: :post
   has_one :pinned_post, -> { where(pinned: true) }, class_name: "Post"
   
   devise :database_authenticatable, :registerable,
