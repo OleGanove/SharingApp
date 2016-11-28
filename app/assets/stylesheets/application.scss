@@ -225,7 +225,7 @@ textarea {
   background: $white;
   box-shadow: 0px 9px 30px 0px rgba(44,55,79,0.07);
   border-radius: 25px 25px 25px 25px; 
-  margin: 3em auto;
+  margin: 3.5em auto;
   padding: 1em 2em 2em 2em;
 
   h2{
@@ -270,9 +270,8 @@ input[type="checkbox"]{
       max-width: 100%;  
       object-fit: cover; 
       transition: all .2s ease-in-out;
-      filter: sepia(1);
       &:hover {
-        filter: sepia(0);
+        filter: sepia(1);
       }
     }
     
@@ -315,19 +314,30 @@ input[type="checkbox"]{
     }
 
     .curator-comment {
+      margin: 0;
       padding: 1.2em;
     }
   }
 }
 
-.time {
-  font-weight: 700;
-  font-size: .8em;
-  clear: both;
-  color: $main;
-  margin: 0.5em 0 4em 0;
+.time-and-likes {
+  overflow: auto;
+  margin: 0.8em 0 2.5em 0;
 }
 
+.time, .likes{
+  font-weight: 700;
+  font-size: .8em;
+  color: $main;
+}
+
+.time {
+  float: left;
+}
+
+.likes {
+  float: right;
+}
 
 
 
