@@ -5,6 +5,8 @@ class User < ApplicationRecord
   after_commit :set_group_belonging
   attr_accessor :login
   has_many :posts, dependent: :destroy
+  has_one :pinned_post, -> { where(pinned: true) }, class_name: "Post"
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]

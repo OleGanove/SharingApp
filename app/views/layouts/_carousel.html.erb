@@ -1,6 +1,6 @@
 <div id="owl-carousel">
 
-  <% @posts.each do |post| %>
+  <% @pinned_posts.each do |post| %>
   	<div>
       <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>  
   	</div>

@@ -6,7 +6,8 @@ class PostsController < ApplicationController
   before_action :post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.order('pinned desc, created_at desc')
+    @posts = Post.order("created_at desc")
+    @pinned_posts = Post.where(pinned: true).order("created_at DESC")
   end
 
   def new
