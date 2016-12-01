@@ -13,4 +13,15 @@ class Post < ApplicationRecord
       user.posts.where("id != ?", id).update_all(pinned: false)
     end
   end
+
+  before_save :fill_like_number
+
+  private 
+
+  def fill_like_number
+    low = rand(1..5)
+    high = rand(20..25)
+
+    self.assign_attributes(lowlikes: low, highlikes: high)
+  end
 end

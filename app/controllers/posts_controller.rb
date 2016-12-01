@@ -41,12 +41,10 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    # Hier müsste ich zwei neue Fake-Like-Counts einfügen
-    # Je nachdem, in welcher Gruppe ich bin, wird ein anderer count erhöht.
-     
     @post.likes.create(user_id: current_user.id)
 
     respond_to do |format|
+      format.html { redirect_to posts_path }
       format.js
     end
   end
@@ -54,7 +52,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:pinned, :description, :link)
+    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes)
   end
 
   def find_post
@@ -67,5 +65,4 @@ class PostsController < ApplicationController
       redirect_to posts_path
     end
   end
-
 end

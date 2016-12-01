@@ -1,2 +1,13 @@
-$(".like-<%=@post.id%>").html('<%= @post.likes.count.to_s %>');
-$(".heart-<%=@post.id%>").removeClass("fa-heart-o").addClass("fa-heart");
+var my_test_variable = 0;
+
+if (<%= current_user.group == 2 || current_user.group == 4 %>) {
+	my_test_variable = <%= @post.lowlikes %>;
+}
+else {
+	my_test_variable = <%= @post.highlikes %>;
+}
+
+$(".like-<%=@post.id%>").html(my_test_variable + <%= @post.likes.where(user_id: current_user).size %>);
+$(".heart-<%=@post.id%>").removeClass("fa-heart-o").addClass("fa-heart"); 
+
+

@@ -22,10 +22,21 @@
 	  	<div class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
 	  	<div class="likes">
 	  		<span class="like-<%=post.id%>"> 
-	  		  <%= post.likes.count %>
+	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
+
+		  	  <% if current_user.group == 1 || current_user.group == 3 %>
+		  	    <%= num_of_user_likes ? post.highlikes + num_of_user_likes : post.highlikes %>
+		  	  <% else %>
+		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
+		  	  <% end %>
+
 	  		</span>
 	  		<%= link_to upvote_post_path(post), method: :post, class: "heart", remote: true do %>
-	  		  <i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% if post.likes.where(user_id: current_user).empty? %>
+	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% else %>
+	  		  	<i class="fa fa-heart heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% end %>
 	  		<% end %>
 	  	</div>
 	  </div>
