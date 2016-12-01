@@ -19,7 +19,15 @@
 	  </div> 
 	  
 	  <div class="time-and-likes">
-	  	<div class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
+
+	  	<% if post.time_ago %>
+	      <% new_time = current_user.current_sign_in_at - (post.time_ago * 60) %> 
+	    <% else %>
+	      <% new_time = Time.now %>
+	    <% end %>
+
+	  	<div class="time"><%= new_time.strftime("%d %b. %Y")%> - <%= new_time.strftime("%H:%M Uhr") %></div>
+	  	
 	  	<div class="likes">
 	  		<span class="like-<%=post.id%>"> 
 	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>

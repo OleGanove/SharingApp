@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130164653) do
+ActiveRecord::Schema.define(version: 20161201165833) do
 
   create_table "likes", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20161130164653) do
     t.boolean  "pinned"
     t.integer  "lowlikes"
     t.integer  "highlikes"
+    t.integer  "time_ago"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
