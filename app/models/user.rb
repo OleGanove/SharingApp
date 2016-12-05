@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  after_commit :set_group_belonging
+  after_create :set_group_belonging
   attr_accessor :login
   
   has_many :posts, dependent: :destroy
@@ -22,7 +22,8 @@ class User < ApplicationRecord
 
   # Probanden in eine von vier Untersuchungsbedingungen einteilen
   def set_group_belonging
-    self.group = self.id % 4
+    group_number = self.id % 4
+    self.update_attributes(group: group_number)
   end
 
   def self.find_for_database_authentication(warden_conditions)
