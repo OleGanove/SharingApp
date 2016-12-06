@@ -6,7 +6,15 @@
     	<hr>
 
     	<div class="readers">
-    	  <h4>Profil von <%= @user.username %></h4>
-    	  <p>Hier findest du alle Beiträge von <%= @user.username %></p>
+    	  <h4>Profil von <%= @user.first_name %> <%= @user.last_name %></h4>
+    	  <p>Hier findest du alle Beiträge von <%= @user.first_name %> <%= @user.last_name %></p>
+          <p> Beiträge: <%= @user.posts.size %> </p>
+          <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
+
+          <hr>
+
+          <h4>Statistiken über Sharit</h4>
+          <p>Kuratoren: 16</p>
+          <p>Leser (heute): 213</p>
     	</div>
     </div>
