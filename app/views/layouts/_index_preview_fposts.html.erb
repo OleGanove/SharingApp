@@ -1,0 +1,52 @@
+<% if post %>
+	<% preview = LinkThumbnailer.generate(post.link, image_stats: false, verify_ssl: false) %>
+
+	  <div class="index-preview">
+	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
+		<div class="image-text">
+		  <%= link_to(image_tag(preview.images.first.src.to_s), post.link, target: "_blank") %> 
+		  <h4 class="text"><%= link_to preview.title, post.link, target: "_blank" %></h4>
+		</div>
+
+	    <div class="comment">
+    	  <div class="avatar">
+		    <%= image_tag (post.picture) %>
+		  </div>
+		  <p class="curator-comment">
+		    Kurator <%= post.first_name %> <%= post.last_name %>: <%= post.description %>
+		  </p>
+		</div>
+	  </div> 
+	  
+	  <div class="time-and-likes">
+
+	  	<% if post.time_ago %>
+	      <% new_time = current_user.current_sign_in_at - (post.time_ago * 60) %> 
+	    <% else %>
+	      <% new_time = Time.now %>
+	    <% end %>
+
+	  	<div class="time"><%= new_time.strftime("%d %b. %Y")%> - <%= new_time.strftime("%H:%M Uhr") %></div>
+
+		<div class="likes">
+	  		<span class="like-<%=post.id%>"> 
+	  		  <% num_of_user_likes = post.flikes.where(user_id: current_user).size %>
+
+		  	  <% if current_user.group == 1 || current_user.group == 3 %>
+		  	    <%= num_of_user_likes ? post.highlikes + num_of_user_likes : post.highlikes %>
+		  	  <% else %>
+		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
+		  	  <% end %>
+	  		</span>
+	  		
+	  		<%= link_to fupvote_post_path(post), method: :post, class: "heart", remote: true do %>
+	  		  <% if post.flikes.where(user_id: current_user).empty? %>
+	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% else %>
+	  		  	<i class="fa fa-heart heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% end %>
+	  		<% end %>
+	  	</div>
+	  </div>
+
+<% end %>

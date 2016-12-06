@@ -1,16 +1,21 @@
+<a class="btn prev">< Vorheriges</a>
 <div id="owl-carousel">
 
-  <% @pinned_posts.each do |post| %>
+  <% @pinned.each do |post| %>
   	<div>
-      <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>  
+      <% if post.is_a?(Post) %>
+        <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
+      <% else %>
+        <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
+      <% end %>
   	</div>
   <% end %>
 
 </div>
-
-<div class="customNavigation">
-  <a class="btn prev">< Vorheriges</a>
   <a class="btn next">Nächstes ></a>
+<div class="customNavigation">
+  
+
 </div>
 
 

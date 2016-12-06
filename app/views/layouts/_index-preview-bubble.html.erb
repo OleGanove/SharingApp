@@ -1,5 +1,5 @@
 <% if post %>
-	<% preview = LinkThumbnailer.generate(post.link) %>
+	<% preview = LinkThumbnailer.generate(post.link, image_stats: false, verify_ssl: false) %>
 
 	  <div class="index-preview">
 	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
@@ -20,13 +20,7 @@
 	  
 	  <div class="time-and-likes">
 
-	  	<% if post.time_ago %>
-	      <% new_time = current_user.current_sign_in_at - (post.time_ago * 60) %> 
-	    <% else %>
-	      <% new_time = Time.now %>
-	    <% end %>
-
-	  	<div class="time"><%= new_time.strftime("%d %b. %Y")%> - <%= new_time.strftime("%H:%M Uhr") %></div>
+	  	<div class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
 	  	
 	  	<div class="likes">
 	  		<span class="like-<%=post.id%>"> 
@@ -37,8 +31,8 @@
 		  	  <% else %>
 		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
 		  	  <% end %>
-
 	  		</span>
+	  		
 	  		<%= link_to upvote_post_path(post), method: :post, class: "heart", remote: true do %>
 	  		  <% if post.likes.where(user_id: current_user).empty? %>
 	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	

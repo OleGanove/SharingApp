@@ -1,0 +1,3 @@
+id,email,encrypted_password,reset_password_token,reset_password_sent_at,remember_created_at,sign_in_count,current_sign_in_at,last_sign_in_at,current_sign_in_ip,last_sign_in_ip,created_at,updated_at,username,group,first_name,last_name
+1,test@gmx.de,$2a$11$nVZHOz/oodisFQirO.294.STXLL16hawr8PqwoL.XDAnQYDWnAg5G,,,,0,,,,,2016-12-05 15:04:10.263081,2016-12-05 15:04:10.263081,Testnutzer,,,
+2,nogo@gmx.de,$2a$11$ZP1EPWwYgxXR/Fa0h/5q2eHBCFqOV0q909f1zIOx1hHLg7wbfl4IW,,,,5,2016-12-06 10:30:57.870648,2016-12-05 19:04:23.068091,132.230.194.210,132.230.194.230,2016-12-05 15:27:41.612767,2016-12-06 10:31:14.430628,Nogo,2,Ngoc,Truong

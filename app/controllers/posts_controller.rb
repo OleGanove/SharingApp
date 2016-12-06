@@ -1,13 +1,16 @@
 
 class PostsController < ApplicationController
-  # Hier noch before_action authenticate_user? 
   before_action :find_post, only: [:edit, :update, :destroy, :upvote]
   before_action :authenticate_user!
   before_action :post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 9)
-    @pinned_posts = Post.where(pinned: true).order("created_at DESC")
+    @posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
+    @fposts = Fpost.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
+    @allposts = @posts + @fposts
+    @pinned_posts = Post.where(user_id: current_user.id, pinned: true).order("created_at DESC")
+    @pinned_fposts = Fpost.where(pinned: true).order("created_at DESC")
+    @pinned = @pinned_posts + @pinned_fposts
   end
 
   def new
@@ -49,10 +52,20 @@ class PostsController < ApplicationController
     end
   end
 
+  def fupvote
+    @fpost = Fpost.find(params[:id])
+    @fpost.flikes.create(user_id: current_user.id)
+
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago)
+    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture)
   end
 
   def find_post

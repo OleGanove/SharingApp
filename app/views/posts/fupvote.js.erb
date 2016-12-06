@@ -1,0 +1,11 @@
+var my_test_variable = 0;
+
+if (<%= current_user.group == 2 || current_user.group == 4 %>) {
+	my_test_variable = <%= @fpost.lowlikes %>;
+}
+else {
+	my_test_variable = <%= @fpost.highlikes %>;
+}
+
+$(".like-<%=@fpost.id%>").html(my_test_variable + <%= @fpost.flikes.where(user_id: current_user).size %>);
+$(".heart-<%=@fpost.id%>").removeClass("fa-heart-o").addClass("fa-heart"); 

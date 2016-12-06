@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :posts, except: [:show] do
     member do 
       post 'upvote'
+      post 'fupvote'
     end
   end
 

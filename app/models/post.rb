@@ -19,9 +19,6 @@ class Post < ApplicationRecord
   private 
 
   def fill_like_number
-    low = rand(1..5)
-    high = rand(20..25)
-
-    self.assign_attributes(lowlikes: low, highlikes: high)
+    self.assign_attributes(lowlikes: 0, highlikes: 0)
   end
 end

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyString
+  link: MyString
+  pinned: false
+  lowlikes: 1
+  highlikes: 1
+  time_ago: 1
+  picture: MyString
+  first_name: MyString
+  last_name: MyString
+
+two:
+  description: MyString
+  link: MyString
+  pinned: false
+  lowlikes: 1
+  highlikes: 1
+  time_ago: 1
+  picture: MyString
+  first_name: MyString
+  last_name: MyString

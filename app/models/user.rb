@@ -6,10 +6,20 @@ class User < ApplicationRecord
   attr_accessor :login
   
   has_many :posts, dependent: :destroy
+
+  # Liking real posts
   has_many :likes, dependent: :destroy
   has_many :upvoted_posts, through: :likes, source: :post
+
+  # Pinning posts
   has_one :pinned_post, -> { where(pinned: true) }, class_name: "Post"
   
+  # Liking fake posts
+  has_many :fposts, dependent: :destroy
+  has_many :flikes, dependent: :destroy
+  has_many :upvoted_fposts, through: :flikes, source: :fpost
+
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]

@@ -15,17 +15,21 @@
 	<h2>Alle Beiträge</h2>
 </div>
 
-<% @posts.in_groups_of(3).each do |post_array| %>
+<% @allposts.in_groups_of(3).each do |post_array| %>
   <div class="row">
   <% post_array.each_with_index do |post, index| %>
     <div class="col-md-4">
-      <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>  
+      <% if post.is_a?(Post) %>
+        <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
+      <% else %>
+        <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
+      <% end %>
     </div>
   <% end %>
   </div>
 <% end %>
 
 <div class="col-md-12">
-	<%= will_paginate @posts, previous_label: "Vorherige", next_label: "Nächste" %>
+  <%= will_paginate @fposts, previous_label: "Vorherige", next_label: "Nächste" %>
 </div>
 
