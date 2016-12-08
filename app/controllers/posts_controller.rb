@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture)
+    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture, :first_time_visited_at)
   end
 
   def find_post
@@ -78,4 +78,5 @@ class PostsController < ApplicationController
       redirect_to posts_path
     end
   end
+
 end

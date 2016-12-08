@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206175205) do
+ActiveRecord::Schema.define(version: 20161208145946) do
 
   create_table "flikes", force: :cascade do |t|
     t.integer  "user_id"
@@ -61,13 +61,14 @@ ActiveRecord::Schema.define(version: 20161206175205) do
     t.text     "description"
     t.text     "link"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.boolean  "pinned"
     t.integer  "lowlikes"
     t.integer  "highlikes"
     t.integer  "time_ago"
     t.string   "picture"
+    t.datetime "first_time_visited_at"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
