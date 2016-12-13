@@ -19,7 +19,7 @@
 	<h2>Alle Beiträge</h2>
 </div>
 
-<% @allposts.in_groups_of(3).each do |post_array| %>
+<% @all_posts.in_groups_of(3).each do |post_array| %>
   <div class="row">
   <% post_array.each_with_index do |post, index| %>
     <div class="col-md-4">
@@ -34,6 +34,6 @@
 <% end %>
 
 <div class="col-md-12">
-  <%= will_paginate @fposts, previous_label: "Vorherige", next_label: "Nächste" %>
+  <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste" %>
 </div>
 

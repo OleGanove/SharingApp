@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
   def impressum
   end
 
-  def about
+  def datenschutz
   end
   
 end

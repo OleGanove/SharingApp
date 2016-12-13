@@ -5,12 +5,22 @@ class PostsController < ApplicationController
   before_action :post_owner, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
-    @fposts = Fpost.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
-    @allposts = @posts + @fposts
-    @pinned_posts = Post.where(user_id: current_user.id, pinned: true).order("created_at DESC")
-    @pinned_fposts = Fpost.where(pinned: true).order("created_at DESC")
+    #@posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
+    @posts = Post.where(user_id: current_user.id)
+    @fake_posts = Fpost.all
+    @all_posts = @posts + @fake_posts
+    
+    #Sort all posts
+    @all_posts = @all_posts.sort_by(&:created_at)
+    @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
+
+    # Pinned posts
+    @pinned_posts = Post.where(user_id: current_user.id, pinned: true)
+    @pinned_fposts = Fpost.where(pinned: true)
     @pinned = @pinned_posts + @pinned_fposts
+
+    # Sort all pinned posts
+    @pinned = @pinned.sort_by(&:created_at)
   end
 
   def new
