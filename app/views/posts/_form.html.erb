@@ -23,7 +23,7 @@
 
       <%= f.check_box :pinned, class: "left" %>
       <%= f.label "Beitrag oben anpinnen?" %>
-      <p class="info-text">Du kannst nur einen Beitrag anpinnen. Falls du schon einen angepinnten Beitrag hast, wird dieser automatisch "ent-"pinnt. </p>
+      <p class="info-text">Wenn du einen Beitrag anpinnst, bleibt er länger für andere sichtbar. Du kannst nur einen Beitrag anpinnen. Falls du schon einen angepinnten Beitrag hast, wird dieser automatisch "ent-"pinnt. </p>
       <% if @post.errors[:pinned] %>
           <% @post.errors[:pinned].each do |msg| %>
             <p class="error">*<%= msg %></p>

@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
-  get '/help',    to: 'static_pages#help'
+  get '/about',    to: 'static_pages#about'
   get '/datenschutz',   to: 'static_pages#datenschutz'
-  get '/contact', to: 'static_pages#contact'
+  get '/nutzung', to: 'static_pages#nutzung'
   get '/impressum', to: 'static_pages#impressum'
   get '*path' => redirect('/')
 end

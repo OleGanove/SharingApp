@@ -601,6 +601,35 @@ footer {
   }
 }
 
+.info-box, .profile {
+  background: $white;
+  box-shadow: 0px 9px 30px 0px rgba(44, 55, 79, 0.07);
+  padding: 1em 2em;
+  margin: 1em;
+  margin-bottom: 2em;
+}
+
+.profile {
+  display: inline-block;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 0;
+    text-align: center !important;
+  }
+
+  .profile-photo{
+    border-radius: 100%;
+    width: 6em;
+    height: 6em;
+    margin: 1em 0.5em 0.5em 0.5em;
+  }
+
+  .profile-info {
+    text-align: left;
+  }
+}
+
 @import "normalize";
 @import "home";
 @import "font-awesome";
