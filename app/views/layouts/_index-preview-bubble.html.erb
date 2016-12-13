@@ -20,7 +20,7 @@
 	  
 	  <div class="time-and-likes">
 
-	  	<div class="time"><%= post.created_at.strftime("%d %b. %Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
+	  	<div class="time"><%= post.created_at.strftime("%d.%m.%Y")%> - <%= post.created_at.strftime("%H:%M Uhr") %></div>
 	  	
 	  	<div class="likes">
 	  		<span class="like-<%=post.id%>"> 

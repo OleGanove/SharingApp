@@ -1,11 +1,10 @@
 <% if post %>
-	<% preview = LinkThumbnailer.generate(post.link, image_stats: false, verify_ssl: false) %>
 
 	  <div class="index-preview">
 	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
 		<div class="image-text">
-		  <%= link_to(image_tag(preview.images.first.src.to_s), post.link, target: "_blank") %> 
-		  <h4 class="text"><%= link_to preview.title, post.link, target: "_blank" %></h4>
+		  <%= link_to(image_tag(post.image_url, class: "cover"), post.link, target: "_blank") %> 
+		  <h4 class="text"><%= link_to post.title, post.link, target: "_blank" %></h4>
 		</div>
 
 	    <div class="comment">
@@ -26,7 +25,7 @@
 	      <% new_time = Time.now %>
 	    <% end %>
 
-	  	<div class="time"><%= new_time.strftime("%d %b. %Y")%> - <%= new_time.strftime("%H:%M Uhr") %></div>
+	  	<div class="time"><%= new_time.strftime("%d.%m.%Y")%> - <%= new_time.strftime("%H:%M Uhr") %></div>
 
 		<div class="likes">
 	  		<span class="like-<%=post.id%>"> 

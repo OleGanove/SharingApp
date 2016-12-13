@@ -11,7 +11,7 @@ class PostsController < ApplicationController
     @all_posts = @posts + @fake_posts
     
     #Sort all posts
-    @all_posts = @all_posts.sort_by(&:created_at)
+    @all_posts = @all_posts.sort_by(&:created_at).reverse
     @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
 
     # Pinned posts
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     @pinned = @pinned_posts + @pinned_fposts
 
     # Sort all pinned posts
-    @pinned = @pinned.sort_by(&:created_at)
+    @pinned = @pinned.sort_by(&:created_at).reverse
   end
 
   def new
