@@ -31,7 +31,7 @@
           <br>
       <% end %>
 
-      <%= f.hidden_field :first_time_visited_at, value: Time.current %>
+      <%= f.hidden_field :first_time_visited_at, value: Time.now %>
 
       <%= f.submit class: "btn btn-primary" %>
 
