@@ -10,6 +10,11 @@ class PostsController < ApplicationController
     @fake_posts = Fpost.all
     @all_posts = @posts + @fake_posts
     
+    # Wie ändere ich die Reihenfolge der Fakeposts zufällig?
+    #   1) @fake_posts.to_a.shuffle   ???
+    #   2) Mit normalen Posts in @all_posts zusammenfügen
+    #   3) 
+
     #Sort all posts
     @all_posts = @all_posts.sort_by(&:created_at).reverse
     @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
