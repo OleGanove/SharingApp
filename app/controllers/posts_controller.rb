@@ -7,16 +7,19 @@ class PostsController < ApplicationController
   def index
     #@posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
     @posts = Post.where(user_id: current_user.id)
-    @fake_posts = Fpost.all
+    #@fake_posts = Fpost.all
+    # Besser: Nur randomisierte Fakeposts nehmen, die mit dem aktuellen Benutzer zusammenhängen, also: 
+    @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id})
+
+    # Schon vorher ordnen? Also @đake_posts.order("fake_time DESC")
+    # Aber dann ist unklar, ob dann neue Posts auch als allererstes erscheinen? 
     @all_posts = @posts + @fake_posts
-    
-    # Wie ändere ich die Reihenfolge der Fakeposts zufällig?
-    #   1) @fake_posts.to_a.shuffle   ???
-    #   2) Mit normalen Posts in @all_posts zusammenfügen
-    #   3) 
+
 
     #Sort all posts
     @all_posts = @all_posts.sort_by(&:created_at).reverse
+    
+    #@all_posts = @all_posts.sort_by(&:fake_time).reverse
     @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
 
     # Pinned posts
@@ -80,7 +83,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture, :first_time_visited_at)
+    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture, :first_time_visited_at, :fake_time)
   end
 
   def find_post

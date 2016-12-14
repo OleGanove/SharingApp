@@ -15,10 +15,15 @@ class Post < ApplicationRecord
   end
 
   before_save :fill_like_number
-
+  after_create :set_fake_time
+  
   private 
 
   def fill_like_number
     self.assign_attributes(lowlikes: 0, highlikes: 0)
+  end
+
+  def set_fake_time
+    self.update_attributes(fake_time: self.created_at)
   end
 end

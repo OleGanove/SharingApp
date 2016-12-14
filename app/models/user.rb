@@ -19,11 +19,12 @@ class User < ApplicationRecord
   has_many :flikes, dependent: :destroy
   has_many :upvoted_fposts, through: :flikes, source: :fpost
 
+  # Randomized fake posts
+  has_many :randomized_fposts, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
-
 
   validates :username, :presence => true,
                        :uniqueness => { :case_sensitive => false }

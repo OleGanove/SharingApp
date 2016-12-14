@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fpost_id: 1
+  user_id: 1
+  fake_time: 2016-12-14 16:46:22
+
+two:
+  fpost_id: 1
+  user_id: 1
+  fake_time: 2016-12-14 16:46:22
