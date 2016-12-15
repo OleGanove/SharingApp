@@ -1,6 +1,6 @@
 var my_test_variable = 0;
 
-if (<%= current_user.group == 2 || current_user.group == 4 %>) {
+if (<%= current_user.group == 0 || current_user.group == 2 %>) {
 	my_test_variable = <%= @fpost.lowlikes %>;
 }
 else {

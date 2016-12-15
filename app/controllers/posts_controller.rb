@@ -7,28 +7,25 @@ class PostsController < ApplicationController
   def index
     #@posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
     @posts = Post.where(user_id: current_user.id)
-    #@fake_posts = Fpost.all
-    # Besser: Nur randomisierte Fakeposts nehmen, die mit dem aktuellen Benutzer zusammenhängen, also: 
-    @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id})
-
-    # Schon vorher ordnen? Also @đake_posts.order("fake_time DESC")
-    # Aber dann ist unklar, ob dann neue Posts auch als allererstes erscheinen? 
+    @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
     @all_posts = @posts + @fake_posts
 
-
     #Sort all posts
-    @all_posts = @all_posts.sort_by(&:created_at).reverse
+    @all_posts = @all_posts.sort_by(&:fake_time).reverse
     
     #@all_posts = @all_posts.sort_by(&:fake_time).reverse
     @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
 
     # Pinned posts
     @pinned_posts = Post.where(user_id: current_user.id, pinned: true)
-    @pinned_fposts = Fpost.where(pinned: true)
+    @pinned_fposts = Fpost.where(pinned: true).joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
     @pinned = @pinned_posts + @pinned_fposts
 
     # Sort all pinned posts
-    @pinned = @pinned.sort_by(&:created_at).reverse
+    @pinned = @pinned.sort_by(&:fake_time).reverse
+
+    # Random posts
+    @random_fposts = @fake_posts.order("RANDOM()").first(10)
   end
 
   def new

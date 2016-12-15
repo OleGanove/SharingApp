@@ -9,18 +9,10 @@
 	</p>
 </div>
 
+
 <%= render "layouts/carousel" %>
 
 <hr> 
-<div class="info col-md-12">
-	<h2>Zufällige Beiträge</h2>
-</div>
-
-<% @random_fposts.each do |post| %>
-	<p><%= post.title %></p>
-	<p><%= post.description %></p>
-	<p><%= image_tag(post.image_url) %></p>
-<% end %>
 
 
 <div class="info col-md-12">
@@ -45,3 +37,4 @@
 <div class="col-md-12">
   <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste" %>
 </div>
+

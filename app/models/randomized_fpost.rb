@@ -14,3 +14,5 @@ class RandomizedFpost < ApplicationRecord
     self.assign_attributes(fake_time: random_time(10.days.ago))
   end
 end
+
+
