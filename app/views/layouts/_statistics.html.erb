@@ -1,7 +1,7 @@
 <div class="statistics">
   <div class="container">
       <div class="col-md-4 personal">
-        <%= image_tag "avatar.png" %>
+        <%= image_tag current_user.avatar.url %>
         <div class="personal-stats">
       		<h4>Hallo <%= current_user.first_name %>! Du bist Kurator</h4>
      		<p>Beiträge: <%= current_user.posts.size %></p>

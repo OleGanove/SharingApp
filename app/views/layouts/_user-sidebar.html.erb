@@ -1,6 +1,6 @@
     <div id="sidebar-wrapper">
     	<div class="avatar_info">
-    	  <%= link_to(image_tag("ngoc_avatar.jpg"), user_path(@user) ) %>
+        <%= image_tag current_user.avatar.url %>
     	</div>
 
     	<hr>
@@ -14,7 +14,16 @@
           <hr>
 
           <h4>Statistiken über Sharit</h4>
-          <p>Kuratoren: 16</p>
-          <p>Leser (heute): 213</p>
+      <% if current_user.group == 0 || current_user.group == 1 %>
+        <p>Kuratoren: 17</p>
+      <% else %>
+        <p>Kuratoren: 85</p>
+      <% end %>
+
+      <% if current_user.group == 0 || current_user.group == 2 %>
+        <p>Leser (heute): 1065</p>
+      <% else %>
+        <p>Leser (heute): 213</p>
+      <% end %>
     	</div>
     </div>

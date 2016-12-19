@@ -2,9 +2,16 @@
 
   <h2><%= t('.title', :resource => resource_class.model_name.human , :default => "Benutzer bearbeiten") %></h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
     <%= devise_error_messages! %>
+    <div class="profile-pic">
+      <%= image_tag current_user.avatar.url(:medium) %>
+    </div>
+    <br>
+    <br>
 
+    <div><%= f.label :avatar, "Profilfoto" %><br />
+    <%= f.file_field :avatar %></div>
 
     <div><%= f.label :username, "Benutzername" %><br />
     <%= f.text_field :username %></div>

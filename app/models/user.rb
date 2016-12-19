@@ -22,6 +22,10 @@ class User < ApplicationRecord
   # Randomized fake posts
   has_many :randomized_fposts, dependent: :destroy
 
+  # Paperclip
+  has_attached_file :avatar, styles: { medium: "200x200#", thumb: "50x50>" }, default_url: "missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
