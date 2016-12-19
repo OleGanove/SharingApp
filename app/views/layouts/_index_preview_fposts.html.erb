@@ -21,7 +21,7 @@
 	  <div class="time-and-likes">
 
 
-	  	<div class="time"><%= DateTime.parse(post.fake_time).strftime("%d.%m.%Y")%> - <%= DateTime.parse(post.fake_time).strftime("%H:%M Uhr") %></div>
+	  	<div class="time"><%= DateTime.parse(post.fake_time.to_s).strftime("%d.%m.%Y")%> - <%= DateTime.parse(post.fake_time.to_s).strftime("%H:%M Uhr") %></div>
 
 		<div class="likes">
 	  		<span class="like-<%=post.id%>"> 
