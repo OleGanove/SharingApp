@@ -1,10 +1,10 @@
 var my_test_variable = 0;
 
 if (<%= current_user.group == 0 || current_user.group == 2 %>) {
-	my_test_variable = <%= @fpost.lowlikes %>;
+	my_test_variable = <%= @fpost.highlikes %>;
 }
 else {
-	my_test_variable = <%= @fpost.highlikes %>;
+	my_test_variable = <%= @fpost.lowlikes %>;
 }
 
 $(".like-<%=@fpost.id%>").html(my_test_variable + <%= @fpost.flikes.where(user_id: current_user).size %>);

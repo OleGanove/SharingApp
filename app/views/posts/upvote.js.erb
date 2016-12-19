@@ -1,10 +1,10 @@
 var my_test_variable = 0;
 
 if (<%= current_user.group == 0 || current_user.group == 2 %>) {
-	my_test_variable = <%= @post.lowlikes %>;
+	my_test_variable = <%= @post.highlikes %>;
 }
 else {
-	my_test_variable = <%= @post.highlikes %>;
+	my_test_variable = <%= @post.lowlikes %>;
 }
 
 $(".like-<%=@post.id%>").html(my_test_variable + <%= @post.likes.where(user_id: current_user).size %>);

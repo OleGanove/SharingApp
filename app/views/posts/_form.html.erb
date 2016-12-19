@@ -20,7 +20,7 @@
       <% end %>
       <%= f.text_area :description, class: "form-control" %>
 
-
+    <% if current_user.group == 0 || current_user.group == 1 %>
       <%= f.check_box :pinned, class: "left" %>
       <%= f.label "Beitrag oben anpinnen?" %>
       <p class="info-text">Wenn du einen Beitrag anpinnst, bleibt er länger für andere sichtbar. Du kannst nur einen Beitrag anpinnen. Falls du schon einen angepinnten Beitrag hast, wird dieser automatisch "ent-"pinnt. </p>
@@ -30,7 +30,8 @@
           <% end %>
           <br>
       <% end %>
-
+    <% end %>
+    
       <%= f.hidden_field :first_time_visited_at, value: Time.now %>
 
       <%= f.submit class: "btn btn-primary" %>

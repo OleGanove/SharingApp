@@ -1,6 +1,7 @@
 
 <div id="owl-carousel">
 
+<% if current_user.group == 0 || current_user.group == 1 %>
   <% @pinned.each do |post| %>
   	<div>
       <% if post.is_a?(Post) %>
@@ -10,6 +11,17 @@
       <% end %>
   	</div>
   <% end %>
+<% else %>
+  <% @random_fposts.each do |post| %>
+    <div>
+      <% if post.is_a?(Post) %>
+        <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
+      <% else %>
+        <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 
 </div>
 

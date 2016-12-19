@@ -2,26 +2,23 @@
   <% content_for :title, "Beitrag erfolgreich erstellt" %>
 <% end %>
 
-<div class="info col-md-6">
-	<h2>Angepinnte Beiträge</h2>
-	<p>
-		Hier findest du die Créme de la Créme. Artikel, die von unseren Kuratoren als sehr lesenswert eingeschätzt und angepinnt wurden. 
-	</p>
-</div>
-
-<%= render "layouts/carousel" %>
-
-<hr> 
-<div class="info col-md-12">
-	<h2>Zufällige Beiträge</h2>
-</div>
-
-<% @random_fposts.each do |post| %>
-	<p><%= post.title %></p>
-	<p><%= post.description %></p>
-	<p><%= image_tag(post.image_url) %></p>
+<% if current_user.group == 0 || current_user.group == 1 %>
+  <div class="info col-md-6">
+  	<h2>Angepinnte Beiträge</h2>
+  	<p>
+  		Hier findest du die Créme de la Créme. Artikel, die von unseren Kuratoren als sehr lesenswert eingeschätzt und angepinnt wurden. 
+  	</p>
+  </div>
+<% else %>
+  <div class="info col-md-6">
+    <h2>Zufällige Beiträge</h2>
+    <p>
+      Hier findest du zufällige Artikel von unseren Kuratoren. Bei jedem Refresh der Seite kommen andere zufällige Artikel.
+    </p>
+  </div>  
 <% end %>
 
+<%= render "layouts/carousel" %>
 
 <div class="info col-md-12">
 	<h2>Alle Beiträge</h2>

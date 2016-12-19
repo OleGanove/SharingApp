@@ -26,7 +26,7 @@
 	  		<span class="like-<%=post.id%>"> 
 	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
 
-		  	  <% if current_user.group == 1 || current_user.group == 3 %>
+		  	  <% if current_user.group == 0 || current_user.group == 2 %>
 		  	    <%= num_of_user_likes ? post.highlikes + num_of_user_likes : post.highlikes %>
 		  	  <% else %>
 		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
