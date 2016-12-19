@@ -20,11 +20,6 @@
 	  
 	  <div class="time-and-likes">
 
-	  	<% if post.time_ago %>
-	      <% new_time = current_user.current_sign_in_at - (post.time_ago * 60) %> 
-	    <% else %>
-	      <% new_time = Time.now %>
-	    <% end %>
 
 	  	<div class="time"><%= DateTime.parse(post.fake_time).strftime("%d.%m.%Y")%> - <%= DateTime.parse(post.fake_time).strftime("%H:%M Uhr") %></div>
 
