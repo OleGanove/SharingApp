@@ -7,7 +7,13 @@ class RandomizedFpost < ApplicationRecord
   private
 
   def random_time(from = 0.0, to = Time.now) 
-    Time.at(from + rand * (to.to_f - from.to_f))
+    t = Time.at(from + rand * (to.to_f - from.to_f))
+
+    while t.hour.between?(0, 7)
+      t = Time.at(from + rand * (to.to_f - from.to_f))
+    end
+
+    return t
   end
 
   def set_fake_time
