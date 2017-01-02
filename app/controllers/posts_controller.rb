@@ -36,6 +36,8 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
+      # Hier dann einen Fakepost nehmen und seine "fake_time" aktualisieren
+      
       redirect_to posts_path, notice: "Dein Beitrag wurde erfolgreich gespeichert."
     else
       render 'new', notice: "Leider konnte dein Beitrag nicht gespeichert werden."

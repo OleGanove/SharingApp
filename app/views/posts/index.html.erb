@@ -28,7 +28,7 @@
 <% @all_posts.in_groups_of(3).each do |post_array| %>
   <div class="row">
   <% post_array.each_with_index do |post, index| %>
-    <div class="col-md-4">
+      <div class="col-md-4 <%= 'first' if post == @all_posts.first %>">
       <% if post.is_a?(Post) %>
         <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
       <% else %>
