@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161219163110) do
+ActiveRecord::Schema.define(version: 20170102203610) do
 
   create_table "flikes", force: :cascade do |t|
     t.integer  "user_id"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20161219163110) do
     t.datetime "updated_at",  null: false
     t.string   "title"
     t.string   "image_url"
+    t.integer  "lowviews"
+    t.integer  "highviews"
+  end
+
+  create_table "fviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "fpost_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
@@ -72,6 +81,8 @@ ActiveRecord::Schema.define(version: 20161219163110) do
     t.string   "picture"
     t.datetime "first_time_visited_at"
     t.datetime "fake_time"
+    t.integer  "lowviews"
+    t.integer  "highviews"
     t.index ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -108,6 +119,13 @@ ActiveRecord::Schema.define(version: 20161219163110) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "views", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "votes", force: :cascade do |t|

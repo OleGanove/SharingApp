@@ -1,0 +1,20 @@
+
+$(document).on("click", '.link', function() {
+    $.ajax({
+                 url: "/posts/view", // Route to the Script Controller method
+                type: "GET",
+            dataType: "json",
+                data: { post_id: $(this).attr('id') }, // This goes to Controller in params hash, i.e. params[:file_name]
+            complete: function() {},
+             success: function(data, textStatus, xhr) {
+                        // Do something with the response here
+                        								   // Show the file contents in our editor.
+                                                           // editor is defined somewhere above 
+                                                           // 'file_content' is the key we use to respond
+                                                           // in the controller function below
+                      },
+               error: function() {
+                        alert("Ajax error!")
+                      }
+    });
+});

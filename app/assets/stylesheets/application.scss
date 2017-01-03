@@ -326,7 +326,7 @@ input[type="checkbox"]{
   margin: 0.8em 0 2.5em 0;
 }
 
-.time, .likes{
+.time, .likes, .icons{
   font-weight: 700;
   font-size: .8em;
   color: $main;
@@ -336,8 +336,9 @@ input[type="checkbox"]{
   float: left;
 }
 
-.likes {
+.likes, .icons {
   float: right;
+  margin-left: 1em;
 }
 
 

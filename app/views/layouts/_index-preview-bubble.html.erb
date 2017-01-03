@@ -5,9 +5,9 @@
 	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
 		<div class="image-text">
 		  <% if !preview.images.first.nil? %>
-		  	<%= link_to(image_tag(preview.images.first.src.to_s), post.link, target: "_blank") %> 
+		  	<%= link_to(image_tag(preview.images.first.src.to_s), post.link, class: "link", id: post.id, target: "_blank") %> 
 		  <% end %>
-		  <h4 class="text"><%= link_to preview.title, post.link, target: "_blank" %></h4>
+		  <h4 class="text"><%= link_to preview.title, post.link, class: "link", id: post.id,target: "_blank" %></h4>
 		</div>
 
 	    <div class="comment">
@@ -24,7 +24,24 @@
 
 	  	<div class="time"><%= post.created_at.localtime.strftime("%d.%m.%Y")%> - <%= post.created_at.localtime.strftime("%H:%M Uhr") %></div>
 	  	
-	  	<div class="likes">
+
+	  	<div class="views icons">
+	  		<span class="like-<%=post.id%>"> 
+	  		  <% num_of_user_views = post.views.where(user_id: current_user).size %>
+
+		  	  <% if current_user.group == 0 || current_user.group == 2 %>
+		  	    <%= num_of_user_views ? post.highviews + num_of_user_views : post.highviews %>
+		  	  <% else %>
+		  	    <%= num_of_user_views ? post.lowviews + num_of_user_views : post.lowviews %>
+		  	  <% end %>
+	  		</span>
+	  		
+
+	  		<i class="fa fa-eye eye-<%=post.id%>" aria-hidden="true"></i>	
+	  	</div>
+
+
+	  	<div class="likes icons">
 	  		<span class="like-<%=post.id%>"> 
 	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
 

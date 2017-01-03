@@ -5,19 +5,29 @@ class User < ApplicationRecord
   after_create :set_group_belonging
   attr_accessor :login
   
+  # User can create posts (but actually no fposts... egal)
   has_many :posts, dependent: :destroy
-
-  # Liking real posts
-  has_many :likes, dependent: :destroy
-  has_many :upvoted_posts, through: :likes, source: :post
+  has_many :fposts, dependent: :destroy
 
   # Pinning posts
   has_one :pinned_post, -> { where(pinned: true) }, class_name: "Post"
   
+  # Liking real posts
+  has_many :likes, dependent: :destroy
+  has_many :upvoted_posts, through: :likes, source: :post
+
   # Liking fake posts
-  has_many :fposts, dependent: :destroy
+
   has_many :flikes, dependent: :destroy
   has_many :upvoted_fposts, through: :flikes, source: :fpost
+
+  # Viewing real posts
+  has_many :views, dependent: :destroy
+  has_many :viewed_posts, through: :views, source: :post
+
+  # Viewving fake posts
+  has_many :fviews, dependent: :destroy
+  has_many :viewed_fposts, through: :fviews, source: :fpost
 
   # Randomized fake posts
   has_many :randomized_fposts, dependent: :destroy
@@ -26,10 +36,12 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "200x200#", thumb: "50x50>" }, default_url: "missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   
+  # Devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:login]
 
+  # Validation
   validates :username, :presence => true,
                        :uniqueness => { :case_sensitive => false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true

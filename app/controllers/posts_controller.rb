@@ -60,6 +60,7 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  # Upvotes for real and fakeposts
   def upvote
     @post.likes.create(user_id: current_user.id)
 
@@ -79,10 +80,31 @@ class PostsController < ApplicationController
     end
   end
 
+  # Views for real and fakeposts
+  def view
+    @post = Post.find(params[:post_id])
+    @post.views.create(user_id: current_user.id)
+    
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js 
+    end
+  end
+
+  def fview
+    @fpost = Fpost.find(params[:post_id])
+    @fpost.fviews.create(user_id: current_user.id)
+
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js
+    end
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture, :first_time_visited_at, :fake_time)
+    params.require(:post).permit(:pinned, :description, :link, :lowlikes, :highlikes, :time_ago, :picture, :first_time_visited_at, :fake_time, :lowviews, :highviews)
   end
 
   def find_post
