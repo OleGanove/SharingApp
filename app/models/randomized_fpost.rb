@@ -2,7 +2,7 @@ class RandomizedFpost < ApplicationRecord
   belongs_to :user
   belongs_to :fpost
 
-  before_save :set_fake_time
+  after_create :set_fake_time
 
   private
 
@@ -17,7 +17,7 @@ class RandomizedFpost < ApplicationRecord
   end
 
   def set_fake_time
-    self.assign_attributes(fake_time: random_time(10.days.ago))
+    self.update_attributes(fake_time: random_time(10.days.ago))
   end
 end
 

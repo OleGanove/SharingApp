@@ -757,6 +757,61 @@ Warum Marken & Unternehmen sich mit Snapchat beschäftigen sollten',
   first_name: 'Ralf',
   last_name: 'Becker',
   image_url: 'teaser-201668.jpeg'
+  },
+  {
+  title: 'Verbraucherschützer warnt vor Wanzen im eigenen Heim',
+  description: 'Die Verbraucherzentralen sehen erhebliche Risiken für private Daten bei vernetzten Elektrogeräten im Haus und Spielzeug mit Verbindung ins Internet.',
+  link: 'https://www.heise.de/newsticker/meldung/Verbraucherschuetzer-warnt-vor-Wanzen-im-eigenen-Heim-3581696.html',
+  pinned: false,
+  time_ago: 45,
+  picture: 'ava20-rectangle.jpg',
+  first_name: 'Mathias',
+  last_name: 'Meyer',
+  image_url: 'teaser-201669.jpeg'
+  },
+  {
+  title: 'So essen die Deutschen',
+  description: 'Es soll schnell gehen, möglichst günstig und natürlich auch gesund sein: der „Ernährungsreport 2017“ gibt Auskunft darüber, was die Deutschen am liebsten essen.',
+  link: 'https://www.welt.de/wirtschaft/article160822594/So-essen-die-Deutschen.html',
+  pinned: false,
+  time_ago: 23,
+  picture: 'ava21-rectangle.jpg',
+  first_name: 'Markus',
+  last_name: 'Walter',
+  image_url: 'teaser-201670.jpg'
+  },
+  {
+  title: 'Kommen die besten Herrenschuhe vielleicht doch aus Wien?',
+  description: 'Wenn von Qualitätsschuhen die Rede ist, spricht man meist von Schuhwerk aus England und Italien. Das ist unfair, denn Österreichs Hauptstadt erlebt eine wahre Renaissance.',
+  link: 'http://www.welt.de/icon/maenner/article160517831/Kommen-die-besten-Herrenschuhe-vielleicht-doch-aus-Wien.html',
+  pinned: false,
+  time_ago: 21,
+  picture: 'ava24-rectangle.jpg',
+  first_name: 'Brian',
+  last_name: 'Potts',
+  image_url: 'teaser-201671.jpg'
+  },
+  {
+  title: 'Elon Musk und Google öffnen ihre KI-Spielplätze',
+  description: 'Guter Ansatz.',
+  link: 'https://www.wired.de/collection/tech/elon-musk-und-google-oeffnen-ihre-ki-spielplaetze-fuer-alle',
+  pinned: false,
+  time_ago: 512,
+  picture: 'ava26-rectangle.jpg',
+  first_name: 'Matthias',
+  last_name: 'Werner',
+  image_url: 'teaser-201672.jpg'
+  },
+  {
+  title: 'Google hat 2016 fast eine Milliarde "Piraterie-Links" gelöscht',
+  description: 'Neuer Rekord bei Löschanträgen.',
+  link: 'https://futurezone.at/digital-life/google-hat-2016-fast-eine-milliarde-piraterie-links-geloescht/238.683.652',
+  pinned: false,
+  time_ago: 412,
+  picture: 'ava27-rectangle.jpg',
+  first_name: 'Martina',
+  last_name: 'Schuhmacher',
+  image_url: 'teaser-201673.jpeg'
   }])
 
 

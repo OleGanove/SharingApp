@@ -36,8 +36,6 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      # Hier dann einen Fakepost nehmen und seine "fake_time" aktualisieren
-      
       redirect_to posts_path, notice: "Dein Beitrag wurde erfolgreich gespeichert."
     else
       render 'new', notice: "Leider konnte dein Beitrag nicht gespeichert werden."
@@ -134,4 +132,29 @@ class PostsController < ApplicationController
     num
   end
 
+  def create_fakepost
+    title = "Verbraucherschützer warnt vor Wanzen im eigenen Heim"
+    comment = "Die Verbraucherzentralen sehen erhebliche Risiken für private Daten bei vernetzten Elektrogeräten im Haus und Spielzeug mit Verbindung ins Internet."
+    link = "https://www.heise.de/newsticker/meldung/Verbraucherschuetzer-warnt-vor-Wanzen-im-eigenen-Heim-3581696.html"
+    pinned = false
+    time_ago = 45
+    avatar = "ava20.jpg"
+    firstname = "Mathias"
+    secondname = "Meyer"
+    pic = "teaser-201669.jpeg"
+
+    @fpost = Fpost.create(
+      description: comment,
+      link: link,
+      pinned: pinned,
+      time_ago: time_ago,
+      picture: pic,
+      first_name: firstname,
+      last_name: secondname,
+      image_url: pic,
+      title: title
+      )
+
+    current_user.randomized_fposts.create()
+  end
 end
