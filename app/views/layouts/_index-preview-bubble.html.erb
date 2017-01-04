@@ -26,7 +26,7 @@
 	  	
 
 	  	<div class="views icons">
-	  		<span class="like-<%=post.id%>"> 
+	  		<span class="view-<%=post.id%>"> 
 	  		  <% num_of_user_views = post.views.where(user_id: current_user).size %>
 
 		  	  <% if current_user.group == 0 || current_user.group == 2 %>

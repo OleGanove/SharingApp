@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'posts/fview' => 'posts#fview'
-  get 'posts/view'  => 'posts#view'
+  post 'posts/fview' => 'posts#fview'
+  post 'posts/view'  => 'posts#view'
 
   authenticated :user do 
     root "posts#index"
@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   get '/datenschutz',   to: 'static_pages#datenschutz'
   get '/nutzung', to: 'static_pages#nutzung'
   get '/impressum', to: 'static_pages#impressum'
-  #get '*path' => redirect('/')
+  get '*path' => redirect('/')
 end

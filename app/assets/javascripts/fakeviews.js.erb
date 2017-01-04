@@ -1,19 +1,21 @@
 
 $(document).on("click", '.flink', function() {
-	var id = $(this).attr('id');
 
+    var id = $(this).attr('id');
     $.ajax({
                  url: "/posts/fview", // Route to the Script Controller method
-                type: "GET",
+                type: "POST",
             dataType: "json",
-                data: { post_id: id }, // This goes to Controller in params hash, i.e. params[:file_name]
+             headers: {
+              "Content-Type": "application/json"
+             }, 
+            data: JSON.stringify({ post_id: id }), // This goes to Controller in params hash, i.e. params[:file_name]
             complete: function() {},
              success: function(data, textStatus, xhr) {
-
-             },
+                        $(".view-" + id).html(data);
+                      },
                error: function(jqXHR, textStatus, errorThrown) {
                         console.log(textStatus, errorThrown);
-                        alert("Fehler");
                       }
     });
 });

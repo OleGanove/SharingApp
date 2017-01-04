@@ -84,10 +84,12 @@ class PostsController < ApplicationController
   def view
     @post = Post.find(params[:post_id])
     @post.views.create(user_id: current_user.id)
-    
+
+    views = @post.views.where(user_id: current_user).size + give_num_of_basic_fakeviews(@post)
+
     respond_to do |format|
       format.html { redirect_to posts_path }
-      format.js 
+      format.js {render json: views }
     end
   end
 
@@ -95,9 +97,11 @@ class PostsController < ApplicationController
     @fpost = Fpost.find(params[:post_id])
     @fpost.fviews.create(user_id: current_user.id)
 
+    views = @fpost.fviews.where(user_id: current_user).size + give_num_of_basic_fakeviews(@fpost)
+
     respond_to do |format|
       format.html { redirect_to posts_path }
-      format.js
+      format.js {render json: views }
     end
   end
 
@@ -116,6 +120,18 @@ class PostsController < ApplicationController
       flash[:notice] = "Tut mir Leid, aber du kannst nur deine eigenen Beiträge editieren."
       redirect_to posts_path
     end
+  end
+
+  def give_num_of_basic_fakeviews(post)
+    num = 0
+
+    if current_user.group == 0 || current_user.group == 2
+      num = post.highviews
+    else
+      num = post.lowviews
+    end
+
+    num
   end
 
 end
