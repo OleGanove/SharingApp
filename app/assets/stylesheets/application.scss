@@ -118,6 +118,11 @@ textarea {
   padding-left: 0;
 }
 
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* Bootstrap Flash*/
 .alert {
   margin-top: -1em;

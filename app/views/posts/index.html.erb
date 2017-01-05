@@ -24,21 +24,98 @@
 	<h2>Alle Beiträge</h2>
 </div>
 
+<% i = 0 %>
 
+<div class="col-md-12 box">
 <% @all_posts.in_groups_of(3).each do |post_array| %>
-  <div class="row">
+
   <% post_array.each_with_index do |post, index| %>
-      <div class="col-md-4 <%= 'first' if post == @all_posts.first %>">
+
+      <div class="col-md-4 <%= "post" + i.to_s if post.is_a?(Fpost)%>">
       <% if post.is_a?(Post) %>
         <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
       <% else %>
         <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post } %>  
       <% end %>
     </div>
+
+    <% if post.is_a? (Fpost) %>
+      <% i = i + 1 %>
+    <% end %>
+
   <% end %>
-  </div>
 <% end %>
+</div>
 
 <div class="col-md-12">
   <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste" %>
 </div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  // Umwandlung der Login-Zeit in Millisekunden
+  <% current_sign_in = current_user.current_sign_in_at %>;  // Achtung: Muss ich hier + 1.hour machen? Weil es unterschiedliche Zeitzonen sind?
+  <% current_sign_in = current_sign_in.to_f * 1000 %>
+
+  // Deklaration von zukünftigen Zeitpunkten in Millisekunden
+
+  // Bei Kurzlebigkeit: nach 27, 9, 3 [1620000, 540000, 180000] Minuten erscheint ein Post 
+  // Bei Langlebigkeit: nach 243, 27, 9 [14580000, 1620000, 540000] Minuten (ACHTUNG: umgedreht)
+
+  <% if current_user.group == 2 || current_user.group == 3 %>
+    <% ms_in_future = [12000, 9000, 6000] %>
+  <% else %>
+    <% ms_in_future = [12000, 9000, 6000]%>
+  <% end %>
+
+  <% ms_from_current_sign_in_on = [] %>
+
+  <% ms_in_future.each do |time| %>
+    <% ms_from_current_sign_in_on << (current_sign_in + time) %>
+  <% end %>
+
+
+  // Ruby array zu JS Array umwandeln. Hier: Zeit in MS von der Startmessung aus (also 1970 oder so?)
+  var now = new Date();
+  var inXMilliseconds = <%= j ms_from_current_sign_in_on.to_json %>
+  var inXDate = [];
+  var timeRemaining = [];
+
+
+  // Javascript Millisekunden in ein eindeutiges Datum umwandeln
+  for (i = 0; i < inXMilliseconds.length; i++) {
+    inXDate[i] = new Date(inXMilliseconds[i]);
+  }
+
+  // Wie lange noch, bis das Datum erreicht wurde? Time remaining für alle Zeitpunkte
+  for (i = 0; i < inXMilliseconds.length; i++) {
+    timeRemaining[i] = (inXDate[i].getTime() - now.getTime());
+  }
+
+  // Alle posts verstecken
+
+  for (i = 0; i < timeRemaining.length; i++) {
+    if (timeRemaining[i] > 0) {
+      $(".post" + i).hide();
+    }
+  }
+
+  // Posts nach und nach reinbringen
+  for (i = 0 ; i < timeRemaining.length ; i++) {
+    if (timeRemaining[i] > 0) {
+      doSetTimeout(i);
+    }
+  }
+
+  function doSetTimeout(i) {
+    setTimeout(function() {
+        $(".post" + i).fadeIn();
+    }, timeRemaining[i]);
+  }
+
+});
+
+</script>

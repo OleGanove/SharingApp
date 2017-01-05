@@ -17,7 +17,16 @@ class RandomizedFpost < ApplicationRecord
   end
 
   def set_fake_time
-    self.update_attributes(fake_time: random_time(10.days.ago))
+    # Wenn User mit group == 2 || User mit group == 3
+    ## Dann setze die Zeiten viel kürzer (z.B. nur 5.days.ago)
+    user = User.find_by(id: self.user_id)
+
+    if user.group == 2 || user.group == 3
+      self.update_attributes(fake_time: random_time(5.days.ago))
+    else
+      self.update_attributes(fake_time: random_time(10.days.ago))
+    end
+
   end
 end
 

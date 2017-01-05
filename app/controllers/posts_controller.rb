@@ -8,6 +8,10 @@ class PostsController < ApplicationController
     #@posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
     @posts = Post.where(user_id: current_user.id)
     @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
+    
+    @future_fake_posts = @fake_posts.where('fake_time > ?', Time.now)
+    @past_fake_posts = @fake_posts.where('fake_time < ?', Time.now)
+
     @all_posts = @posts + @fake_posts
 
     #Sort all posts

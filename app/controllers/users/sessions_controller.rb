@@ -5,29 +5,31 @@ class Users::SessionsController < Devise::SessionsController
       # Warum nochmal bei jedem Login? 
       # Weil sich sonst die Fakezeiten nicht ändern, wenn sich jemand einlogged.
 
-      #allFposts = Fpost.all
-      #seventyFposts = Fpost.order("RANDOM()").limit(70) # ACHTUNG: Bei mySQL heißt es: User.order("RAND()").limit(10)
-      #rest = allFposts - seventyFposts
-
       user.randomized_fposts.delete_all
 
-      # Fakeposts in der Vergangenheit
       Fpost.all.each do |fp|
         user.randomized_fposts.new(fpost: fp)
       end
 
-      futurePosts = user.randomized_fposts.order("RANDOM()").limit(3)
       # Fakeposts in der Zukunft
-      i = 1
+      # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen
 
 
+      futurePosts = user.randomized_fposts.order("RANDOM()").limit(3) 
+      i = 3
 
       user.save
 
+      # 3 Fakeposts sollen in der Zukunft sein
       futurePosts.each do |fp|
-        fp.update_attribute(:fake_time, Time.now + 1.hour + i.minutes)
-        i = i + 1
+        fp.update_attribute(:fake_time, Time.now + i.minutes) # ACHTUNG: + 1.hour macht, dass die drei Posts alle ganz oben stehen!!!
+
+        if user.group == 2 || user.group == 3
+          i = i * 3
+        else 
+          i = i * 9
+        end
       end
-   end
+    end
   end
 end
