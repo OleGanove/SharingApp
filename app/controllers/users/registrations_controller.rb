@@ -19,6 +19,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       pinnedPosts = Fpost.order("RANDOM()").limit(9)
       pinnedPosts.update_all(pinned: true) 
 
+      Fpost.where(pinned: true).each do |post|
+        post.update_attributes( lowviews: 1 + post.lowviews * 5, 
+                                highviews: 1 + post.highviews * 3,
+                                lowlikes: 1 + post.lowlikes * 5,
+                                highlikes: 1 + post.highlikes * 3)
+      end
+
       # Fakeposts in der Zukunft
       # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen
       futurePosts = user.randomized_fposts.order("RANDOM()").limit(3) 

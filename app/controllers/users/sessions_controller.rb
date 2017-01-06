@@ -20,9 +20,17 @@ class Users::SessionsController < Devise::SessionsController
       # Alle angepinnten Fakeposts auf false setzen
       Fpost.update_all(pinned: false, futurepost: false)
 
-      # 9 zufällige Fakeposts auf true setzen
+      # 9 zufällige Fakeposts auf pinned: true setzen
       pinnedPosts = Fpost.order("RANDOM()").limit(9)
       pinnedPosts.update_all(pinned: true) 
+
+      # Alle 
+      Fpost.where(pinned: true).each do |post|
+        post.update_attributes( lowviews: 1 + post.lowviews * 5, 
+                                highviews: 1 + post.highviews * 3,
+                                lowlikes: 1 + post.lowlikes * 5,
+                                highlikes: 1 + post.highlikes * 3)
+      end
 
       # Fakeposts in der Zukunft
       # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen

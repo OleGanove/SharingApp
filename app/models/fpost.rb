@@ -13,11 +13,11 @@ class Fpost < ApplicationRecord
   has_many :randomized_fposts, dependent: :destroy
 
   def fill_like_and_view_number
-    low = rand(1..5)
-    high = rand(20..25)
+    lowlikes = rand(1..5)
+    highlikes = rand(20..25)
     lowview = rand(1..20)
     highview = rand(50..200)
 
-    self.assign_attributes(lowlikes: low, highlikes: high, lowviews: lowview, highviews: highview)
+    self.assign_attributes(lowlikes: lowlikes, highlikes: highlikes, lowviews: lowview, highviews: highview)
   end
 end
