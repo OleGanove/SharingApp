@@ -1,5 +1,8 @@
 
 class PostsController < ApplicationController
+
+  #@@update_counters = 0
+
   before_action :find_post, only: [:edit, :update, :destroy, :upvote]
   before_action :authenticate_user!
   before_action :post_owner, only: [:edit, :update, :destroy]
@@ -11,6 +14,7 @@ class PostsController < ApplicationController
     
     @future_fake_posts = @fake_posts.where('fake_time > ?', Time.now)
     @past_fake_posts = @fake_posts.where('fake_time < ?', Time.now)
+    @future_and_real_posts = @future_fake_posts + @posts
 
     @all_posts = @posts + @fake_posts
 
@@ -30,6 +34,24 @@ class PostsController < ApplicationController
 
     # Random posts
     @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()").first(9)
+
+    # Update views and likes after each request
+    #if @@update_counters % 5 == 0
+    #  @future_and_real_posts.each do |fp|
+    #    fp.update_attributes(lowviews: fp.lowviews + rand(0..1), 
+    #                         highviews: fp.highviews + rand(5..10),
+    #                         lowlikes: fp.lowlikes + rand(0..1),
+    #                         highlikes: fp.highlikes + rand(0..1))
+    #  end
+    #  @@update_counters += 1
+    #end
+
+    @all_posts.each do |fp|
+      fp.update_attributes(lowviews: fp.lowviews + rand(0..1), 
+                           highviews: fp.highviews + rand(5..10),
+                           lowlikes: fp.lowlikes + rand(0..1),
+                           highlikes: fp.highlikes + rand(0..1))
+    end
   end
 
   def new
@@ -107,6 +129,25 @@ class PostsController < ApplicationController
     end
   end
 
+  # Wenn die Futureposts erscheinen, sollen sie 0 likes und 0 views haben!
+  def reset_future_posts
+    @futureposts = Fpost.where(futurepost: true)
+    futureposts_ids = []
+
+    @futureposts.each do |post|
+      post.update_attributes( lowviews: 0, 
+                              highviews: 0,
+                              lowlikes: 0,
+                              highlikes: 0)
+      futureposts_ids << post.id
+    end
+
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js {render json: futureposts_ids }
+    end
+  end
+
   private
 
   def post_params
@@ -134,31 +175,5 @@ class PostsController < ApplicationController
     end
 
     num
-  end
-
-  def create_fakepost
-    title = "Verbraucherschützer warnt vor Wanzen im eigenen Heim"
-    comment = "Die Verbraucherzentralen sehen erhebliche Risiken für private Daten bei vernetzten Elektrogeräten im Haus und Spielzeug mit Verbindung ins Internet."
-    link = "https://www.heise.de/newsticker/meldung/Verbraucherschuetzer-warnt-vor-Wanzen-im-eigenen-Heim-3581696.html"
-    pinned = false
-    time_ago = 45
-    avatar = "ava20.jpg"
-    firstname = "Mathias"
-    secondname = "Meyer"
-    pic = "teaser-201669.jpeg"
-
-    @fpost = Fpost.create(
-      description: comment,
-      link: link,
-      pinned: pinned,
-      time_ago: time_ago,
-      picture: pic,
-      first_name: firstname,
-      last_name: secondname,
-      image_url: pic,
-      title: title
-      )
-
-    current_user.randomized_fposts.create()
   end
 end

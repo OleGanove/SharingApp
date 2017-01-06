@@ -46,6 +46,8 @@ class Users::SessionsController < Devise::SessionsController
           i = i * 9
         end
       end
+
+      
     end
   end
 end

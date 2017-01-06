@@ -1,5 +1,5 @@
 class Fpost < ApplicationRecord
-  before_save :fill_like_and_view_number
+  before_create :fill_like_and_view_number
 
   belongs_to :user, optional: true
   

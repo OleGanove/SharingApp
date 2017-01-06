@@ -25,7 +25,7 @@
 	  	<div class="time"><%= DateTime.parse(post.fake_time.to_s).localtime.strftime("%d.%m.%Y")%> - <%= DateTime.parse(post.fake_time.to_s).localtime.strftime("%H:%M Uhr") %></div>
 
 	  	<div class="views icons">
-	  		<span class="view-<%=post.id%>"> 
+	  		<span class="counter view-<%=post.id%>"> 
 	  		  <% num_of_user_views = post.fviews.where(user_id: current_user).size %>
 
 		  	  <% if current_user.group == 0 || current_user.group == 2 %>
@@ -40,7 +40,7 @@
 	  	</div>
 
 		<div class="likes icons">
-	  		<span class="like-<%=post.id%>"> 
+	  		<span class="counter like-<%=post.id%>"> 
 	  		  <% num_of_user_likes = post.flikes.where(user_id: current_user).size %>
 
 		  	  <% if current_user.group == 0 || current_user.group == 2 %>

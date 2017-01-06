@@ -66,9 +66,9 @@ $(document).ready(function(){
   // Bei Langlebigkeit: nach 243, 27, 9 [14580000, 1620000, 540000] Minuten (ACHTUNG: umgedreht)
 
   <% if current_user.group == 2 || current_user.group == 3 %>
-    <% ms_in_future = [12000, 9000, 6000] %>
+    <% ms_in_future = [18000, 12000, 6000] %>
   <% else %>
-    <% ms_in_future = [12000, 9000, 6000]%>
+    <% ms_in_future = [18000, 12000, 6000]%>
   <% end %>
 
   <% ms_from_current_sign_in_on = [] %>
@@ -112,10 +112,32 @@ $(document).ready(function(){
 
   function doSetTimeout(i) {
     setTimeout(function() {
+
+        $.ajax({
+          url: "/posts/reset_future_posts",
+          type: "POST",
+          dataType: "json",
+          headers: {
+            "Content-Type": "application/json"
+          }, 
+          complete: function(){},
+          success: function(data, textStatus, xhr) {
+            var futurePostsIds = Object.values(data);
+
+            $(".view-" + futurePostsIds[i]).html(0);
+            $(".like-" + futurePostsIds[i]).html(0);
+
+          },
+          error: function(jqXHR, textStatus, errorThrown) {              
+            console.log(textStatus, errorThrown);
+          }
+        });
+
         $(".post" + i).fadeIn();
+
     }, timeRemaining[i]);
   }
-
 });
 
 </script>
+

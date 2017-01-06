@@ -17,7 +17,7 @@ class Post < ApplicationRecord
     end
   end
 
-  before_save :fill_like_and_view_number
+  before_create :fill_like_and_view_number
   after_create :set_fake_time
   
   private 

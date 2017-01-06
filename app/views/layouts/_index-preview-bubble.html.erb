@@ -26,7 +26,7 @@
 	  	
 
 	  	<div class="views icons">
-	  		<span class="view-<%=post.id%>"> 
+	  		<span class="counter view-<%=post.id%>"> 
 	  		  <% num_of_user_views = post.views.where(user_id: current_user).size %>
 
 		  	  <% if current_user.group == 0 || current_user.group == 2 %>
@@ -42,7 +42,7 @@
 
 
 	  	<div class="likes icons">
-	  		<span class="like-<%=post.id%>"> 
+	  		<span class="counter like-<%=post.id%>"> 
 	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
 
 		  	  <% if current_user.group == 0 || current_user.group == 2 %>
