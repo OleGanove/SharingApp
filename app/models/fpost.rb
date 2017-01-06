@@ -12,8 +12,6 @@ class Fpost < ApplicationRecord
   # To randomized my post and give a specific timestamp for each user
   has_many :randomized_fposts, dependent: :destroy
 
-  private 
-
   def fill_like_and_view_number
     low = rand(1..5)
     high = rand(20..25)
