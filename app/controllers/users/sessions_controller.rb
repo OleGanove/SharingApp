@@ -18,7 +18,7 @@ class Users::SessionsController < Devise::SessionsController
       end
 
       # Alle angepinnten Fakeposts auf false setzen
-      Fpost.update_all(pinned: false)
+      Fpost.update_all(pinned: false, futurepost: false)
 
       # 9 zufällige Fakeposts auf true setzen
       pinnedPosts = Fpost.order("RANDOM()").limit(9)
@@ -37,7 +37,7 @@ class Users::SessionsController < Devise::SessionsController
 
         # Setze views und likes auf 0
         @fakepost = Fpost.where(id: fp.fpost_id)
-        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0)
+        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true)
 
         # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
         if user.group == 2 || user.group == 3

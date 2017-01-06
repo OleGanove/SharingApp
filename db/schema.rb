@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102203610) do
+ActiveRecord::Schema.define(version: 20170106152418) do
 
   create_table "flikes", force: :cascade do |t|
     t.integer  "user_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170102203610) do
     t.string   "image_url"
     t.integer  "lowviews"
     t.integer  "highviews"
+    t.boolean  "futurepost"
   end
 
   create_table "fviews", force: :cascade do |t|

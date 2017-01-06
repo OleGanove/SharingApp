@@ -18,18 +18,18 @@ class PostsController < ApplicationController
     @all_posts = @all_posts.sort_by(&:fake_time).reverse
     
     #@all_posts = @all_posts.sort_by(&:fake_time).reverse
-    @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 6)
+    @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 9)
 
     # Pinned posts
     @pinned_posts = Post.where(user_id: current_user.id, pinned: true)
-    @pinned_fposts = Fpost.where(pinned: true).joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
+    @pinned_fposts = Fpost.where(pinned: true, futurepost: false).joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
     @pinned = @pinned_posts + @pinned_fposts
 
     # Sort all pinned posts
     @pinned = @pinned.sort_by(&:fake_time).reverse
 
     # Random posts
-    @random_fposts = @fake_posts.order("RANDOM()").first(10)
+    @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()").first(9)
   end
 
   def new
