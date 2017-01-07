@@ -10,6 +10,7 @@ class Users::SessionsController < Devise::SessionsController
         fp.save!
       end
 
+      #pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
       pinnedPosts = Fpost.order("RANDOM()").limit(9)
       pinnedPosts.update_all(pinned: true) 
 
@@ -40,7 +41,7 @@ class Users::SessionsController < Devise::SessionsController
 
       # Fakeposts in der Zukunft
       # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen
-      futurePosts = user.randomized_fposts.offset(rand(user.randomized_fposts.count)).limit(3) 
+      futurePosts = user.randomized_fposts.offset(rand(user.randomized_fposts.count) - 3).limit(3)
 
       i = 3
 

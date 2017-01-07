@@ -69,8 +69,12 @@ class User < ApplicationRecord
       fp.assign_attributes(pinned: false, futurepost: false)
       fp.save!
     end
-      
-    pinnedPosts = Fpost.order("RANDOM()").limit(9)  # ACHTUNG: Bei mySQL funktioniert nur RAND()
+
+    # SQLite3::RangeException Fehler: 
+    pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
+
+    # ACHTUNG: Bei mySQL funktioniert nur RAND()
+    #pinnedPosts = Fpost.order("RANDOM()").limit(9)  
     pinnedPosts.update_all(pinned: true) 
   end
 
@@ -102,7 +106,7 @@ class User < ApplicationRecord
 
   def set_future_posts
 
-      futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count)).limit(3) 
+      futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count) - 3).limit(3) 
 
       i = 3
 
