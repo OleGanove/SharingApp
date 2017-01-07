@@ -3,41 +3,47 @@ class Users::SessionsController < Devise::SessionsController
   def create
     super do |user|
 
-      # Like und view number resetten:
+      # Einträge der Fakeposts resetten
       Fpost.all.each do |fp|
         fp.fill_like_and_view_number
+        fp.assign_attributes(pinned: false, futurepost: false)
         fp.save!
       end
 
-      # Warum nochmal bei jedem Login die joined Posts löschen und erstellen? 
-      # Weil sich sonst die Fakezeiten nicht ändern, wenn sich jemand einlogged.
+      pinnedPosts = Fpost.order("RANDOM()").limit(9)
+      pinnedPosts.update_all(pinned: true) 
+
+
+      # Randomisierten Fakeposts joined-Tabelle resetten
       user.randomized_fposts.delete_all
 
       Fpost.all.each do |fp|
         user.randomized_fposts.new(fpost: fp)
       end
 
-      # Alle angepinnten Fakeposts auf false setzen
-      Fpost.update_all(pinned: false, futurepost: false)
+      # Die angepinnten Posts multiplizieren
 
-      # 9 zufällige Fakeposts auf pinned: true setzen
-      pinnedPosts = Fpost.order("RANDOM()").limit(9)
-      pinnedPosts.update_all(pinned: true) 
+      user.set_group_belonging
+      user.save
 
-      # Alle 
-      Fpost.where(pinned: true).each do |post|
-        post.update_attributes( lowviews: 1 + post.lowviews * 5, 
-                                highviews: 1 + post.highviews * 3,
-                                lowlikes: 1 + post.lowlikes * 5,
-                                highlikes: 1 + post.highlikes * 3)
+      if user.group == 0 || user.group == 1
+        Fpost.where(pinned: true).each do |post|
+          post.update_attributes( lowviews: 1 + post.lowviews * 5, 
+                                  highviews: 1 + post.highviews * 3,
+                                  lowlikes: 1 + post.lowlikes * 5,
+                                  highlikes: 1 + post.highlikes * 3)
+        end
       end
+
+      #user.set_group_belonging
+      #user.save
 
       # Fakeposts in der Zukunft
       # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen
-      futurePosts = user.randomized_fposts.order("RANDOM()").limit(3) 
+      futurePosts = user.randomized_fposts.offset(rand(user.randomized_fposts.count)).limit(3) 
+      puts futurePosts
+      puts "Wieso zum Geier klappt es hier?"
       i = 3
-
-      user.save
 
       # 3 Fakeposts sollen in der Zukunft sein
       futurePosts.each do |fp|
@@ -55,7 +61,7 @@ class Users::SessionsController < Devise::SessionsController
         end
       end
 
-      
+     
     end
   end
 end

@@ -14,9 +14,9 @@ class Fpost < ApplicationRecord
 
   def fill_like_and_view_number
     lowlikes = rand(1..5)
-    highlikes = rand(20..25)
-    lowview = rand(1..20)
-    highview = rand(50..200)
+    highlikes = rand(10..50)
+    lowview = rand(20..30)
+    highview = rand(200..300)
 
     self.assign_attributes(lowlikes: lowlikes, highlikes: highlikes, lowviews: lowview, highviews: highview)
   end

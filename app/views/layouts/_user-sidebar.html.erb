@@ -15,15 +15,16 @@
 
           <h4>Statistiken über Sharit</h4>
       <% if current_user.group == 0 || current_user.group == 1 %>
-        <p>Kuratoren: 17</p>
+        <p>Kuratoren: 21</p>
       <% else %>
-        <p>Kuratoren: 85</p>
+        <p>Kuratoren: 126</p>
       <% end %>
 
       <% if current_user.group == 0 || current_user.group == 2 %>
-        <p>Leser (heute): 1065</p>
+        <p>Leser (online): <%= rand(210..240) %></p>
       <% else %>
-        <p>Leser (heute): 213</p>
+        <p>Leser (online): <%= rand(35..40) %></p>
       <% end %>
     	</div>
     </div>
+

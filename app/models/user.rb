@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  after_create :set_group_belonging
+  after_create :set_group_belonging, :reset_fakeposts, :reset_randomized_fposts, :multiply_views_of_pinned_posts, :set_future_posts
   attr_accessor :login
   
   # User can create posts (but actually no fposts... egal)
@@ -61,6 +61,70 @@ class User < ApplicationRecord
       where(conditions.to_h).first
     end
   end  
+
+
+  def reset_fakeposts
+    Fpost.all.each do |fp|
+      fp.fill_like_and_view_number
+      fp.assign_attributes(pinned: false, futurepost: false)
+      fp.save!
+    end
+      
+    pinnedPosts = Fpost.order("RANDOM()").limit(9)  # ACHTUNG: Bei mySQL funktioniert nur RAND()
+    pinnedPosts.update_all(pinned: true) 
+  end
+
+
+
+  def reset_randomized_fposts
+    self.randomized_fposts.delete_all
+
+    Fpost.all.each do |fp|
+      self.randomized_fposts.create!(fpost: fp)
+    end
+  end
+
+
+  def multiply_views_of_pinned_posts
+      puts "Die Gruppe der neuen Person ist " + self.group.to_s
+
+      if self.group == 0 || self.group == 1
+        puts "Ich gehe hier rein. Jetzt ist die Gruppe: " + self.group.to_s
+        Fpost.where(pinned: true).each do |post|
+          post.update_attributes( lowviews: 1 + post.lowviews * 5, 
+                                  highviews: 1 + post.highviews * 3,
+                                  lowlikes: 1 + post.lowlikes * 5,
+                                  highlikes: 1 + post.highlikes * 3)
+        end
+      end
+  end
+
+
+  def set_future_posts
+
+      futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count)).limit(3) 
+      puts futurePosts
+      puts "Klappt es jetzt?"
+      i = 3
+
+      # 3 Fakeposts sollen in der Zukunft sein
+      futurePosts.each do |fp|
+        fp.update_attribute(:fake_time, Time.now + i.minutes) # ACHTUNG: + 1.hour macht, dass die drei Posts alle ganz oben stehen!!!
+
+        # Setze views und likes auf 0
+        @fakepost = Fpost.where(id: fp.fpost_id)
+        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true)
+
+        # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
+        if self.group == 2 || self.group == 3
+          i = i * 3
+        else 
+          i = i * 9
+        end
+      end
+  end
 end
+
+
 
 

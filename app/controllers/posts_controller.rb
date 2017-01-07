@@ -36,7 +36,10 @@ class PostsController < ApplicationController
     @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()").first(9)
 
     # Update views and likes after each request
-    @all_posts.each do |fp|
+    # All post on a page
+    @really_all_posts = @all_posts + @pinned
+
+    @really_all_posts.each do |fp|
       fp.update_attributes(lowviews: fp.lowviews + rand(1..3), 
                            highviews: fp.highviews + rand(5..10),
                            lowlikes: fp.lowlikes + rand(0..1),
