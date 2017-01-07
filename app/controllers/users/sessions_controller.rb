@@ -41,8 +41,7 @@ class Users::SessionsController < Devise::SessionsController
       # Fakeposts in der Zukunft
       # ACHTUNG funktioniert nicht in mySQL auf heroku! Da muss es RAND oder so heißen
       futurePosts = user.randomized_fposts.offset(rand(user.randomized_fposts.count)).limit(3) 
-      puts futurePosts
-      puts "Wieso zum Geier klappt es hier?"
+
       i = 3
 
       # 3 Fakeposts sollen in der Zukunft sein

@@ -103,8 +103,7 @@ class User < ApplicationRecord
   def set_future_posts
 
       futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count)).limit(3) 
-      puts futurePosts
-      puts "Klappt es jetzt?"
+
       i = 3
 
       # 3 Fakeposts sollen in der Zukunft sein
