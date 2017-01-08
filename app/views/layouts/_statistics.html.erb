@@ -1,29 +1,32 @@
 <div class="statistics">
   <div class="container">
-      <div class="col-md-4 personal">
-        <%= image_tag current_user.avatar.url %>
-        <div class="personal-stats">
-      		<h4>Hallo <%= current_user.first_name %>! Du bist Kurator</h4>
-     		<p>Beiträge: <%= current_user.posts.size %></p>
-     		<p>Angepinnte Beiträge: <%= current_user.posts.where(pinned: true).size %> von 1</p>
-        </div>
+    <div class="col-md-6 personal">
+      <%= image_tag current_user.avatar.url %>
+      <span class="stats-small personal-stats">
+        Hallo <%= current_user.first_name %>! Du bist Kurator.
+      </span>
+    </div>
 
-      </div>
+    <div class="col-md-6 personal sharit-stats">
 
-      <div class="col-md-8 sharit-stats">
-      	<h4>Schau mal, wieviele Sharit bereits nutzen!</h4>
-      <% if current_user.group == 0 || current_user.group == 1 %>
-        <p>Kuratoren: <%= 21 %></p>
-      <% else %>
-        <p>Kuratoren: <%= 126 %></p>
-      <% end %>
+      <span class="stats-small">
+        <% if current_user.group == 0 || current_user.group == 1 %>
+          Kuratoren: <%= 21 %>
+        <% else %>
+          Kuratoren: <%= 126 %>
+        <% end %>
+      </span>
 
-      <% if current_user.group == 0 || current_user.group == 2 %>
-        <p>Leser (online): <%= rand(210..240) %></p>
-      <% else %>
-        <p>Leser (online): <%= rand(35..40) %></p>
-      <% end %>
-      </div>
+      <span class="stats-small">|</span>
+
+      <span class="stats-small">
+        <% if current_user.group == 0 || current_user.group == 2 %>
+          Leser (online): <%= rand(210..240) %>
+        <% else %>
+          Leser (online): <%= rand(35..40) %>
+        <% end %>
+      <span>
+    </div>
 
   </div>
 </div>

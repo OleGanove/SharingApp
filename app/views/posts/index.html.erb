@@ -3,30 +3,36 @@
 <% end %>
 
 <% if current_user.group == 0 || current_user.group == 1 %>
-  <div class="info col-md-6">
-  	<h2>Angepinnte Beiträge</h2>
+  <div class="info col-md-3">
+  	<h2 class="header-title">Angepinnte Beiträge</h2>
   	<p>
   		Hier findest du die Créme de la Créme. Artikel, die von unseren Kuratoren als sehr lesenswert eingeschätzt und angepinnt wurden. 
   	</p>
   </div>
 <% else %>
-  <div class="info col-md-6">
-    <h2>Zufällige Beiträge</h2>
+  <div class="info col-md-3">
+    <h2 class="header-title">Zufällige Beiträge</h2>
     <p>
-      Hier findest du zufällige Artikel von unseren Kuratoren. Bei jedem Refresh der Seite kommen andere zufällige Artikel.
+      Manchmal ist es auch schön, zufällige Artikel zu entdecken! Hier findest du zufällige Artikel unserer Kuratoren. 
     </p>
   </div>  
 <% end %>
 
-<%= render "layouts/carousel" %>
+<div class="col-md-9">
+  <%= render "layouts/carousel" %>
+</div>
 
-<div class="info col-md-12">
-	<h2>Alle Beiträge</h2>
+
+<div class="info col-md-3">
+	<h2 class="header-title">Alle Beiträge</h2>
+  <p>
+     Hier findest du alle Beiträge unserer Kuratoren, fein säuberlich, chronologisch sortiert. 
+  </p>
 </div>
 
 <% i = 0 %>
 
-<div class="col-md-12 box">
+<div class="col-md-9 box">
 <% @all_posts.in_groups_of(3).each do |post_array| %>
 
   <% post_array.each_with_index do |post, index| %>
@@ -45,11 +51,9 @@
 
   <% end %>
 <% end %>
-</div>
-
-<div class="col-md-12">
   <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste" %>
 </div>
+
 
 
 <script type="text/javascript">
