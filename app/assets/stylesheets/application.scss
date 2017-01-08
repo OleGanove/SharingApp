@@ -23,6 +23,8 @@ $dark-grey: #3B362A;
 $dark: #2C3135;
 $light: #EDEFF5;
 $heading: #42ab9e;
+$pinned: #E9D460;
+$grey-light: #BFBDBD;
 
 /*
 $nav: #32ABB3;
@@ -358,6 +360,9 @@ input[type="checkbox"]{
   font-size: 1.2em !important;
 }
 
+.pinned {
+  background: $pinned !important;
+}
 
 
 /* typography */
@@ -447,10 +452,25 @@ a {
 }
 
 .fa-thumb-tack {
-  color: $main !important ;
-  font-size: 2em !important ;
-  top: 0.9em !important ;
-  right: 1em !important ;
+  position: absolute;
+  color: $grey-light !important ;
+  font-size: 1.5em !important ;
+  top: 0.4em !important ;
+  right: 0.4em !important ;
+}
+
+.bell {
+  color: green;
+}
+
+.no-notification{
+  margin-bottom: 0px;
+  margin: 0em 1em;
+  width: 200px;
+}
+
+.nix {
+  margin: 0em 1em;
 }
 
 /* footer */
@@ -511,6 +531,10 @@ footer {
   color: $white;
   margin-top: -10px;
   margin-bottom: 1.5em;
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  z-index: 999;
 
   .container {
     padding: 10px 15px;
@@ -693,7 +717,9 @@ footer {
   }
 }
 
-
+.main-content {
+  margin-top: 3.5em;
+}
 @import "normalize";
 @import "home";
 @import "font-awesome";

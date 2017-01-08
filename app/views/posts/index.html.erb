@@ -1,6 +1,9 @@
+
 <% if flash[:notice] == "Dein Beitrag wurde erfolgreich gespeichert." %>
   <% content_for :title, "Beitrag erfolgreich erstellt" %>
 <% end %>
+
+
 
 <% if current_user.group == 0 || current_user.group == 1 %>
   <div class="info col-md-3">
@@ -24,7 +27,7 @@
 
 
 <div class="info col-md-3">
-	<h2 class="header-title">Alle Beiträge</h2>
+	<h2 style="padding-top: 110px; margin-top: -84px;" id="anchor" class="header-title">Alle Beiträge</h2>
   <p>
      Hier findest du alle Beiträge unserer Kuratoren, fein säuberlich, chronologisch sortiert. 
   </p>
@@ -70,9 +73,9 @@ $(document).ready(function(){
   // Bei Langlebigkeit: nach 243, 27, 9 [14580000, 1620000, 540000] Minuten (ACHTUNG: umgedreht)
 
   <% if current_user.group == 2 || current_user.group == 3 %>
-    <% ms_in_future = [18000, 12000, 6000] %>
+    <% ms_in_future = [120000, 60000, 6000]%>
   <% else %>
-    <% ms_in_future = [18000, 12000, 6000]%>
+    <% ms_in_future = [120000, 60000, 6000]%>
   <% end %>
 
   <% ms_from_current_sign_in_on = [] %>
@@ -104,6 +107,7 @@ $(document).ready(function(){
   for (i = 0; i < timeRemaining.length; i++) {
     if (timeRemaining[i] > 0) {
       $(".post" + i).hide();
+      $(".notifications").hide();
     }
   }
 
@@ -119,7 +123,7 @@ $(document).ready(function(){
 
         $.ajax({
           url: "/posts/reset_future_posts",
-          type: "POST",
+          type: "GET",
           dataType: "json",
           headers: {
             "Content-Type": "application/json"
@@ -128,6 +132,7 @@ $(document).ready(function(){
           success: function(data, textStatus, xhr) {
             var futurePostsIds = Object.values(data);
 
+            //alert("Das sind meine Daten: "+ futurePostsIds);
             $(".view-" + futurePostsIds[i]).html(0);
             $(".like-" + futurePostsIds[i]).html(0);
 
@@ -138,9 +143,13 @@ $(document).ready(function(){
         });
 
         $(".post" + i).fadeIn();
+        $(".fa-bell").css({"color": "red"});
+        $(".notifications").fadeIn();
 
     }, timeRemaining[i]);
   }
+  $(".fa-bell").css({"color": "#EDEFF5"});
+  $(".notifications").hide();
 });
 
 </script>

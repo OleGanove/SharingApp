@@ -1,16 +1,16 @@
 
-<div class="col-md-4">
+<div class="col-md-5">
   <%= render 'layouts/user-sidebar' %>
 </div>
 
-<div class="col-md-8">
+<div class="col-md-7">
 
     <% if @user.posts.any? %>
-	    <% @user.posts.each do |post| %>
+	    <% @user.posts.reverse.each do |post| %>
       		<%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>
 	    <% end %>
     <% else %>
-    	<h3><%= @user.username %> hat leider noch keine Beiträge geteilt.</h3>
+    	<h3>Du hast leider noch keine Beiträge geteilt.</h3>
     <% end %>
 
 </div>

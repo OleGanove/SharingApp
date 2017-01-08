@@ -21,10 +21,9 @@
     <body>
 
       <%= render 'layouts/header' %>
+      <%= render 'layouts/statistics' %>
       <%= render partial: "layouts/flash", flash: flash %> 
-      <% if action_name ==="index" %>
-        <%= render 'layouts/statistics' %>
-      <% end %>
+
 
       <div class="container main-content">
         <%= yield %>

@@ -71,10 +71,10 @@ class User < ApplicationRecord
     end
 
     # SQLite3::RangeException Fehler: 
-    pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
+    #pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
 
     # ACHTUNG: Bei mySQL funktioniert nur RAND()
-    #pinnedPosts = Fpost.order("RANDOM()").limit(9)  
+    pinnedPosts = Fpost.order("RANDOM()").limit(9)  
     pinnedPosts.update_all(pinned: true) 
   end
 
@@ -116,7 +116,7 @@ class User < ApplicationRecord
 
         # Setze views und likes auf 0
         @fakepost = Fpost.where(id: fp.fpost_id)
-        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true)
+        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true, pinned: false)
 
         # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
         if self.group == 2 || self.group == 3

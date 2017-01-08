@@ -51,7 +51,7 @@ class Users::SessionsController < Devise::SessionsController
 
         # Setze views und likes auf 0
         @fakepost = Fpost.where(id: fp.fpost_id)
-        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true)
+        @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true, pinned: false)
 
         # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
         if user.group == 2 || user.group == 3

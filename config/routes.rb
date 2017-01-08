@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   post 'posts/fview' => 'posts#fview'
   post 'posts/view'  => 'posts#view'
-  post 'posts/reset_future_posts' => 'posts#reset_future_posts'
+  get 'posts/reset_future_posts' => 'posts#reset_future_posts'
 
   authenticated :user do 
     root "posts#index"

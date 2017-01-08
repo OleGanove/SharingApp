@@ -7,6 +7,18 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li class="dropdown">
+                <a href="" data-toggle="dropdown" class="dropdown-toggle bell">
+                  <i class="fa fa-bell" aria-hidden="true"></i>
+                </a>
+                <ul class="dropdown-menu no-notification">
+                  <li class="nix">Keine Benachrichtigungen</li>
+                </ul>
+                <ul class="dropdown-menu notifications">
+                  <li class="notifications"> <%= link_to "Jemand hat einen neuen Beitrag erstellt (1)", posts_path(anchor: "anchor") %></li>
+                </ul>
+              </li>
+
+              <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menü <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li>
@@ -44,6 +56,7 @@
                 <% end %>
               </li>
 
+
             <% else %>
               <li><%= link_to 'Einloggen', new_user_session_path %></li>
               <li><%= link_to 'Registrieren', new_user_registration_path %></li>
@@ -52,3 +65,4 @@
         </nav>
       </div>
     </header>
+

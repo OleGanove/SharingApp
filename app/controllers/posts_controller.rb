@@ -6,6 +6,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:edit, :update, :destroy, :upvote]
   before_action :authenticate_user!
   before_action :post_owner, only: [:edit, :update, :destroy]
+  before_action :update_fakelikes_and_fakeviews, only: [:index]
+  after_action  :update_reallikes_and_realviews, only: [:index]
 
   def index
     #@posts = Post.where(user_id: current_user.id).order('created_at DESC').paginate(:page => params[:page], :per_page => 6)
@@ -13,7 +15,7 @@ class PostsController < ApplicationController
     @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
     
     @future_fake_posts = @fake_posts.where('fake_time > ?', Time.now)
-    @past_fake_posts = @fake_posts.where('fake_time < ?', Time.now)
+    @past_fake_posts = @fake_posts.where('fake_time <= ?', Time.now)
     @future_and_real_posts = @future_fake_posts + @posts
 
     @all_posts = @posts + @fake_posts
@@ -36,15 +38,7 @@ class PostsController < ApplicationController
     @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()").first(9)
 
     # Update views and likes after each request
-    # All post on a page
-    @really_all_posts = @all_posts + @pinned
-
-    @really_all_posts.each do |fp|
-      fp.update_attributes(lowviews: fp.lowviews + rand(1..3), 
-                           highviews: fp.highviews + rand(5..10),
-                           lowlikes: fp.lowlikes + rand(0..1),
-                           highlikes: fp.highlikes + rand(0..1))
-    end
+    # Nur eigene Posts aktualisieren, wenn 
   end
 
   def new
@@ -169,5 +163,31 @@ class PostsController < ApplicationController
 
     num
   end
+
+
+
+  def update_fakelikes_and_fakeviews
+    @fake_posts = Fpost.joins(:randomized_fposts).where(randomized_fposts: {user_id: current_user.id}).select("fposts.*, randomized_fposts.fake_time")
+    @past_fake_posts = @fake_posts.where('fake_time <= ?', Time.now)
+   
+    @past_fake_posts.each do |fp|
+     fp.update_attributes(lowviews: fp.lowviews + rand(1..3), 
+                          highviews: fp.highviews + rand(3..5),
+                          lowlikes: fp.lowlikes + rand(0..1),
+                          highlikes: fp.highlikes + rand(0..3))
+    end
+  end
+
+  def update_reallikes_and_realviews
+    @posts = Post.where(user_id: current_user.id)
+
+     @posts.each do |fp|
+     fp.update_attributes(lowviews: fp.lowviews + rand(1..3), 
+                          highviews: fp.highviews + rand(3..5),
+                          lowlikes: fp.lowlikes + rand(0..1),
+                          highlikes: fp.highlikes + rand(0..3))
+    end   
+  end
+
 
 end

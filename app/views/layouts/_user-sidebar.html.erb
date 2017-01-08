@@ -6,8 +6,8 @@
     	<hr>
 
     	<div class="readers">
-    	  <h4>Profil von <%= @user.first_name %> <%= @user.last_name %></h4>
-    	  <p>Hier findest du alle Beiträge von <%= @user.first_name %> <%= @user.last_name %></p>
+    	  <h4>Dein Profil, <%= @user.first_name %> <%= @user.last_name %>!</h4>
+    	  <p>Hier findest du alle deine Beiträge</p>
           <p> Beiträge: <%= @user.posts.size %> </p>
           <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
 
@@ -18,12 +18,6 @@
         <p>Kuratoren: 21</p>
       <% else %>
         <p>Kuratoren: 126</p>
-      <% end %>
-
-      <% if current_user.group == 0 || current_user.group == 2 %>
-        <p>Leser (online): <%= rand(210..240) %></p>
-      <% else %>
-        <p>Leser (online): <%= rand(35..40) %></p>
       <% end %>
     	</div>
     </div>

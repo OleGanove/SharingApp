@@ -3,13 +3,24 @@
 	  <div class="index-preview">
 	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
 		<div class="image-text">
+
+		  <% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
+		  	<i class="fa fa-thumb-tack" aria-hidden="true"></i>
+		  <% end %>
+
+
 		  <%= link_to(image_tag(post.image_url, class: "cover"), post.link, class: "flink", id: post.id, target: "_blank") %> 
 		  <h4 class="text" id="view-<%= post.id%>">
 		  	<%= link_to post.title, post.link, class: "flink", id: post.id, target: "_blank" %>
 		  </h4>
 		</div>
 
-	    <div class="comment">
+		<% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
+		  <div class="pinned comment">
+		<% else %>
+	      <div class="comment">
+		<% end %>
+
     	  <div class="avatar">
 		    <%= image_tag (post.picture) %>
 		  </div>

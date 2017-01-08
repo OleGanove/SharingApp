@@ -35,21 +35,25 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-    	var owl = $("#owl-carousel");
+    	  //var owl = $("#owl-carousel");
 
-        owl.owlCarousel({
+        //owl.trigger('refresh.owl.carousel');
+
+        var $owl = $("#owl-carousel").owlCarousel({
            	slideSpeed: 300,
            	paginationSpeed: 400,
            	items: 3
         });
 
+        $owl.trigger('refresh.owl.carousel');
+
         // Custom navigation events
 
         $(".next").click(function(){
-        	owl.trigger('owl.next');
+        	$owl.trigger('owl.next');
         })
         $(".prev").click(function(){
-        	owl.trigger('owl.prev');
+        	$owl.trigger('owl.prev');
         })
 
     });
