@@ -653,7 +653,7 @@ footer {
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 36%;
+  top: 37%;
   font-size: 2em !important;
   z-index: 998;
 }
@@ -668,7 +668,7 @@ footer {
 
 .owl-controls {
   margin-top: -20px !important;
-  
+  display: none !important;
 }
 
 /* Pagination */
