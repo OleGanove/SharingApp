@@ -1,36 +1,56 @@
 
+  <i class="fa fa-arrow-circle-left btn prev arrows" aria-hidden="true"></i>
+
+
+<div class="col-md-12 middle-carousel">
+
 <div id="owl-carousel">
 
-<% if current_user.group == 0 || current_user.group == 1 %>
-  <% @pinned.each do |post| %>
-  	<div>
-      <% if post.is_a?(Post) %>
-        <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
-      <% else %>
-        <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
-      <% end %>
-  	</div>
+  <% if current_user.group == 0 || current_user.group == 1 %>
+    <% @pinned.each do |post| %>
+      <div>
+        <% if post.is_a?(Post) %>
+          <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
+        <% else %>
+          <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <% @random_fposts.each do |post| %>
+      <div>
+        <% if post.is_a?(Post) %>
+          <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
+        <% else %>
+          <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
+        <% end %>
+      </div>
+    <% end %>
+
   <% end %>
-<% else %>
-  <% @random_fposts.each do |post| %>
-    <div>
-      <% if post.is_a?(Post) %>
-        <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
-      <% else %>
-        <%= render :partial => "layouts/index_preview_fposts", :locals => {:post => post} %>  
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
+
+  </div>
 
 </div>
 
+
+  <i class="fa fa-arrow-circle-right btn next arrows" aria-hidden="true"></i>
+
+
+
+
+
+
+
+
+
+<!--  
 <div class="customNavigation">
   <a class="btn prev">< Vorheriges</a>
   <a class="btn next">Nächstes ></a>
 </div>
 
-
+-->
 
 
 <script type="text/javascript">
@@ -42,7 +62,12 @@
         var $owl = $("#owl-carousel").owlCarousel({
            	slideSpeed: 300,
            	paginationSpeed: 400,
-           	items: 3
+           	items: 3,
+            nav: true,
+            navText: [
+              "<i class='fa fa-chevron-left'></i>",
+              "<i class='fa fa-chevron-right'></i>"
+            ],
         });
 
         $owl.trigger('refresh.owl.carousel');

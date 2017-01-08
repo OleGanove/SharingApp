@@ -37,6 +37,11 @@ $font: #3D3F3D;
 
 
 /* homepage */
+
+a {
+  color: $heading;
+}
+
 .body_home {
 
   background: #134E5E; /* fallback for old browsers */
@@ -131,6 +136,7 @@ textarea {
 .box {
   display: flex;
   flex-wrap: wrap;
+  margin-left: -6px;
 }
 
 /* Bootstrap Flash*/
@@ -236,7 +242,7 @@ textarea {
 
 
 .forms {
-  width: 40%;
+  width: 30%;
   background: $white;
   box-shadow: 0px 9px 30px 0px rgba(44,55,79,0.07);
   border-radius: 25px 25px 25px 25px; 
@@ -271,6 +277,9 @@ input[type="checkbox"]{
   color: grey;
 }
 /* Index Übersicht der Posts */
+.wrap-all-posts {
+  margin-top: 0px;
+}
 
 .index-preview {
   margin: 2em 0 0em 0;
@@ -582,16 +591,29 @@ footer {
 }
 
 .alert {
-  margin-bottom: 0;
+  margin-bottom: -3em;
+  margin-top: 30px;
 }
 
 
 /* Fonts and headings */
 .header-title {
-  margin-top: 1em;
+
+}
+
+.header-text {
+  width: 68%;
+}
+
+.all-posts-heading{
 }
 
 /* Carousel */
+
+.whole-carousel {
+  margin-bottom: 1em;
+}
+
 .owl-item {
   padding: 0 15px;
 }
@@ -600,11 +622,21 @@ footer {
   text-align: center;
 }
 
-.info {
+.info{
   padding: 0 15px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 0.5em;
+  }
+}
+
+.info-all{
+  padding: 0 30px;
+  text-align: left;
+
   h2 {
     text-align: left;
-    margin-bottom: 0.5em;
   }
 }
 
@@ -616,6 +648,28 @@ footer {
   /*background: $pinned;*/
 }
 
+.arrows{
+  width: auto;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 36%;
+  font-size: 2em !important;
+  z-index: 998;
+}
+
+.prev {
+  left: -30px;
+}
+
+.next {
+  right: -30px;
+}
+
+.owl-controls {
+  margin-top: -20px !important;
+  
+}
 
 /* Pagination */
 
