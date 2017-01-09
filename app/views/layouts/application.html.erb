@@ -16,6 +16,12 @@
   
   <% if action_name === "home" %>
     <body class="body_home">
+      <% flash.each do |type, message| %>
+        <div class="home-alert alert <%= bootstrap_class_for(type) %> fade in">
+          <button class="close" data-dismiss="alert">×</button>
+          <%= message %>
+        </div>
+      <% end %>
       <%= yield %>
   <% else %>
     <body>

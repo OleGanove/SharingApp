@@ -10,15 +10,6 @@
     	  <p>Hier findest du alle deine Beiträge</p>
           <p> Beiträge: <%= @user.posts.size %> </p>
           <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
-
-          <hr>
-
-          <h4>Statistiken über Sharit</h4>
-      <% if current_user.group == 0 || current_user.group == 1 %>
-        <p>Kuratoren: 21</p>
-      <% else %>
-        <p>Kuratoren: 126</p>
-      <% end %>
     	</div>
     </div>
 
