@@ -4,10 +4,11 @@
 <% end %>
 
 
+<div class="wrap-all-posts col-md-10 col-md-offset-1">
 
 <% if current_user.group == 0 || current_user.group == 1 %>
   <div class="info col-md-12">
-  	<h2 class="header-title">Angepinnte Beiträge</h2>
+  	<h2 class="header-title">Kurierte Beiträge</h2>
   	<p>
   		Hier findest du die Créme de la Créme. Artikel, die von unseren Kuratoren als sehr lesenswert eingeschätzt und angepinnt wurden. 
   	</p>
@@ -21,14 +22,18 @@
   </div>  
 <% end %>
 
+</div>
+
 <div class="col-md-10 col-md-offset-1 whole-carousel">
   <%= render "layouts/carousel" %>
 </div>
 
 <div class="wrap-all-posts col-md-10 col-md-offset-1">
 
-<div class="info-all col-md-4">
-  <h2 style="padding-top: 110px; margin-top: -82px;" id="anchor" class="header-title all-posts-heading">Alle Beiträge</h2>
+<br>
+
+<div class="info col-md-12">
+  <h2 id="anchor" class="header-title">Alle Beiträge</h2>
   <p>
      Hier findest du alle Beiträge unserer Kuratoren, fein säuberlich, chronologisch sortiert. 
   </p>
@@ -36,12 +41,12 @@
 
 <% i = 0 %>
 
-<div class="col-md-8 box">
+<div class="col-md-12 ">
 <% @all_posts.in_groups_of(3).each do |post_array| %>
 
   <% post_array.each_with_index do |post, index| %>
 
-      <div class="col-md-6 <%= "post" + i.to_s if post.is_a?(Fpost)%>">
+      <div class="col-md-6 all-posts-margin <%= "post" + i.to_s if post.is_a?(Fpost)%>">
       <% if post.is_a?(Post) %>
         <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
       <% else %>
@@ -55,9 +60,9 @@
 
   <% end %>
 <% end %>
-  <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste", page_links: false %>
-</div>
 
+</div>
+  <%= will_paginate @all_posts, previous_label: "Vorherige", next_label: "Nächste", page_links: false %>
 </div>
 
 

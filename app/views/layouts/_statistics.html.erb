@@ -12,16 +12,6 @@
     <div class="col-md-6 personal sharit-stats">
 
       <span class="stats-small">
-        <% if current_user.group == 0 || current_user.group == 1 %>
-          Kuratoren: <%= 21 %>
-        <% else %>
-          Kuratoren: <%= 126 %>
-        <% end %>
-      </span>
-
-      <span class="stats-small">|</span>
-
-      <span class="stats-small">
         <% if current_user.group == 0 || current_user.group == 2 %>
           Leser (online): <%= rand(210..240) %>
         <% else %>

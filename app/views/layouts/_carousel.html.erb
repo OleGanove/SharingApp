@@ -1,6 +1,6 @@
-
+<% if current_user.group == 0 || current_user.group == 1 %>
   <i class="fa fa-arrow-circle-left btn prev arrows" aria-hidden="true"></i>
-
+<% end %>
 
 <div class="col-md-12 middle-carousel">
 
@@ -17,7 +17,7 @@
       </div>
     <% end %>
   <% else %>
-    <% @random_fposts.each do |post| %>
+    <% @fake_posts.each do |post| %>
       <div>
         <% if post.is_a?(Post) %>
           <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 
@@ -33,9 +33,9 @@
 
 </div>
 
-
+<% if current_user.group == 0 || current_user.group == 1 %>
   <i class="fa fa-arrow-circle-right btn next arrows" aria-hidden="true"></i>
-
+<% end %>
 
 
 
@@ -62,6 +62,9 @@
         var $owl = $("#owl-carousel").owlCarousel({
            	slideSpeed: 300,
            	paginationSpeed: 400,
+            <% if current_user.group == 2 || current_user.group == 3 %>
+              <%= "autoPlay: 8000," %>
+            <% end %>
            	items: 3,
             nav: true,
             loop: true,

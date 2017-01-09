@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @all_posts = @all_posts.sort_by(&:fake_time).reverse
     
     #@all_posts = @all_posts.sort_by(&:fake_time).reverse
-    @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 9)
+    @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 8)
 
     # Pinned posts
     @pinned_posts = Post.where(user_id: current_user.id, pinned: true)

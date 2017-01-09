@@ -1,56 +1,12 @@
 
 <% if post %>
-	  <div class="index-preview">
-	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
-		<div class="image-text">
 
-		  <% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
-		  	<i class="fa fa-thumb-tack" aria-hidden="true"></i>
-		  <% end %>
-
-
-		  <%= link_to(image_tag(post.image_url, class: "cover"), post.link, class: "flink", id: post.id, target: "_blank") %> 
-		  <h4 class="text" id="view-<%= post.id%>">
-		  	<%= link_to post.title, post.link, class: "flink", id: post.id, target: "_blank" %>
-		  </h4>
-		</div>
-
-		<% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
-		  <div class="pinned comment">
-		<% else %>
-	      <div class="comment">
-		<% end %>
-
-    	  <div class="avatar">
-		    <%= image_tag (post.picture) %>
-		  </div>
-		  <p class="curator-comment">
-		    Kurator/in <%= post.first_name %> <%= post.last_name %>: 
-
-		    <% if post.description.length > 120 %>
-		    	<%= truncate(post.description, length: 120) %>
-		    	<%= link_to 'mehr', '', class: "read-more-#{post.id}" %>
-
-		    	<script>
-			      $('.read-more-<%= post.id %>').on('click', function(e) {
-			        e.preventDefault()
-			        $(this).parent().html('Kurator/in <%= post.first_name %> <%= post.last_name %>: <%= post.description %>')
-			      })		    		
-		    	</script>
-		    <% else %>
-		    	<%= post.description %>
-		    <% end %>
-
-		  </p>
-		</div>
-	  </div> 
-	  
 	  <div class="time-and-likes">
 
 	  	<% heroku_timezone = DateTime.parse(post.fake_time.to_s).localtime + 1.hour %>
 
-	  	<div class="time"><%= heroku_timezone.strftime("%d.%m.%Y")%> - <%= heroku_timezone.localtime.strftime("%H:%M Uhr")  %></div>
-
+	  	<div class="time"><%= time_ago_in_words(heroku_timezone) %></div>
+	  	
 	  	<div class="views icons">
 	  		<span class="counter view-<%=post.id%>"> 
 	  		  <% num_of_user_views = post.fviews.where(user_id: current_user).size %>
@@ -86,4 +42,51 @@
 	  		<% end %>
 	  	</div>
 	  </div>
+
+
+	  <div class="index-preview">
+	    <!--<%= link_to content_tag(:span), post.link, target: "_blank" %>-->
+		<div class="image-text">
+
+		  <% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
+		  	<i class="fa fa-thumb-tack" aria-hidden="true"></i>
+		  <% end %>
+
+
+		  <%= link_to(image_tag(post.image_url, class: "cover"), post.link, class: "flink", id: post.id, target: "_blank") %> 
+		  <h4 class="text" id="view-<%= post.id%>">
+		  	<%= link_to post.title, post.link, class: "flink", id: post.id, target: "_blank" %>
+		  </h4>
+		</div>
+
+		<% if (current_user.group == 0 || current_user.group == 1) && post.pinned %>
+		  <div class="pinned comment">
+		<% else %>
+	      <div class="comment">
+		<% end %>
+
+    	  <div class="avatar">
+		    <%= image_tag (post.picture) %>
+		  </div>
+		  <p class="curator-comment">
+		    <p>Kurator/in <%= post.first_name %> <%= post.last_name %>: </p>
+
+		    <% if post.description.length > 120 %>
+		    	<%= truncate(post.description, length: 120) %>
+		    	<%= link_to 'mehr', '', class: "read-more-#{post.id}" %>
+
+		    	<script>
+			      $('.read-more-<%= post.id %>').on('click', function(e) {
+			        e.preventDefault()
+			        $(this).parent().html('Kurator/in <%= post.first_name %> <%= post.last_name %>: <%= post.description %>')
+			      })		    		
+		    	</script>
+		    <% else %>
+		    	<%= post.description %>
+		    <% end %>
+
+		  </p>
+		</div>
+	  </div> 
+
 <% end %>

@@ -1,4 +1,52 @@
 <% if post %>
+
+	  <div class="time-and-likes">
+
+	  	<% heroku_timezone = post.created_at + 1.hour %>
+
+	  	<div class="time"><%= time_ago_in_words(heroku_timezone) %></div>
+
+	  	<div class="views icons">
+	  	
+	  		<span class="counter view-<%=post.id%>"> 
+
+	  		  <% num_of_user_views = post.views.where(user_id: current_user).size %>
+
+		  	  <% if current_user.group == 0 || current_user.group == 2 %>
+		  	    <%= num_of_user_views ? post.highviews + num_of_user_views : post.highviews %>
+		  	  <% else %>
+		  	    <%= num_of_user_views ? post.lowviews + num_of_user_views : post.lowviews %>
+		  	  <% end %>
+
+	  		</span>
+	  	
+
+	  		<i class="fa fa-eye eye-<%=post.id%>" aria-hidden="true"></i>	
+	  	</div>
+
+
+	  	<div class="likes icons">
+	  		<span class="counter like-<%=post.id%>"> 
+	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
+
+		  	  <% if current_user.group == 0 || current_user.group == 2 %>
+		  	    <%= num_of_user_likes ? post.highlikes + num_of_user_likes : post.highlikes %>
+		  	  <% else %>
+		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
+		  	  <% end %>
+	  		</span>
+	  		
+	  		<%= link_to upvote_post_path(post), method: :post, class: "heart", remote: true do %>
+	  		  <% if post.likes.where(user_id: current_user).empty? %>
+	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% else %>
+	  		  	<i class="fa fa-heart heart-<%=post.id%>" aria-hidden="true"></i>	
+	  		  <% end %>
+	  		<% end %>
+	  	</div>
+	  </div>
+
+
 	<% preview = LinkThumbnailer.generate(post.link, image_stats: false, verify_ssl: false) %>
 
 	  <div class="index-preview">
@@ -45,51 +93,4 @@
 		</div>
 	  </div> 
 	  
-	  <div class="time-and-likes">
-
-	  	<% heroku_timezone = post.created_at + 1.hour %>
-
-	  	<div class="time"><%= heroku_timezone.strftime("%d.%m.%Y")%> - <%= heroku_timezone.localtime.strftime("%H:%M Uhr")  %></div>
-
-
-	  	<div class="views icons">
-	  	
-	  		<span class="counter view-<%=post.id%>"> 
-
-	  		  <% num_of_user_views = post.views.where(user_id: current_user).size %>
-
-		  	  <% if current_user.group == 0 || current_user.group == 2 %>
-		  	    <%= num_of_user_views ? post.highviews + num_of_user_views : post.highviews %>
-		  	  <% else %>
-		  	    <%= num_of_user_views ? post.lowviews + num_of_user_views : post.lowviews %>
-		  	  <% end %>
-
-	  		</span>
-	  	
-
-	  		<i class="fa fa-eye eye-<%=post.id%>" aria-hidden="true"></i>	
-	  	</div>
-
-
-	  	<div class="likes icons">
-	  		<span class="counter like-<%=post.id%>"> 
-	  		  <% num_of_user_likes = post.likes.where(user_id: current_user).size %>
-
-		  	  <% if current_user.group == 0 || current_user.group == 2 %>
-		  	    <%= num_of_user_likes ? post.highlikes + num_of_user_likes : post.highlikes %>
-		  	  <% else %>
-		  	    <%= num_of_user_likes ? post.lowlikes + num_of_user_likes : post.lowlikes %>
-		  	  <% end %>
-	  		</span>
-	  		
-	  		<%= link_to upvote_post_path(post), method: :post, class: "heart", remote: true do %>
-	  		  <% if post.likes.where(user_id: current_user).empty? %>
-	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
-	  		  <% else %>
-	  		  	<i class="fa fa-heart heart-<%=post.id%>" aria-hidden="true"></i>	
-	  		  <% end %>
-	  		<% end %>
-	  	</div>
-	  </div>
-
 <% end %>

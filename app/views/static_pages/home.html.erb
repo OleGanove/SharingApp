@@ -3,7 +3,7 @@
 	<h1 class="home-font">	
 	  Willkommen auf Sharit
 	</h1>
-	<h2 class="text-center subtitle">Dein Content. Von Kuratoren ausgesucht.</h2>
+	<h2 class="text-center subtitle">Finde deinen Content. Von Kuratoren ausgesucht.</h2>
 
 	<div class="landing_buttons">
 		<%= link_to "Anmelden", new_user_session_path, class: "btn btn btn-secondary btn-lg btn-left" %>
@@ -13,5 +13,18 @@
 </div>
 
 
-
-
+<footer id="landing-page-footer">
+  <div class="container footer-text">
+    <small>
+      Sharit AG Copyright 2017
+    </small>
+    <nav>
+      <ul>
+        <li><%= link_to "Über uns", about_path %></li>
+        <li><%= link_to "Datenschutz", datenschutz_path %></li>
+        <li><%= link_to "Nutzungsbedingungen", nutzung_path %></li>
+        <li><%= link_to "Impressum", impressum_path %></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
