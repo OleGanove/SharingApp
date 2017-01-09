@@ -47,8 +47,10 @@
 	  
 	  <div class="time-and-likes">
 
-	  	<div class="time"><%= post.created_at.localtime.strftime("%d.%m.%Y")%> - <%= post.created_at.localtime.strftime("%H:%M Uhr") %></div>
-	  	
+	  	<% heroku_timezone = post.created_at + 1.hour %>
+
+	  	<div class="time"><%= heroku_timezone.strftime("%d.%m.%Y")%> - <%= heroku_timezone.localtime.strftime("%H:%M Uhr")  %></div>
+
 
 	  	<div class="views icons">
 	  	
