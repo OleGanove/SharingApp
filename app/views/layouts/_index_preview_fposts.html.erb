@@ -69,7 +69,7 @@
 		    <%= image_tag (post.picture) %>
 		  </div>
 		  <p class="curator-comment">
-		    <p>Kurator/in <%= post.first_name %> <%= post.last_name %>: </p>
+		    Kurator/in <%= post.first_name %> <%= post.last_name %>: 
 
 		    <% if post.description.length > 120 %>
 		    	<%= truncate(post.description, length: 120) %>
