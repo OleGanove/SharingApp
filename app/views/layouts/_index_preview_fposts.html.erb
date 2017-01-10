@@ -48,6 +48,9 @@
 	  		</span>
 		<% end %>
 
+
+
+			
 	  		<%= link_to fupvote_post_path(post), method: :post, class: "heart", remote: true do %>
 	  		  <% if post.flikes.where(user_id: current_user).empty? %>
 	  		  	<i class="fa fa-heart-o heart-<%=post.id%>" aria-hidden="true"></i>	
@@ -55,6 +58,7 @@
 	  		  	<i class="fa fa-heart heart-<%=post.id%>" aria-hidden="true"></i>	
 	  		  <% end %>
 	  		<% end %>
+	  	
 	  	</div>
 	  </div>
 

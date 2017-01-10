@@ -6,6 +6,23 @@
 	<div class="col-md-8">
 
 	    <% if @user.posts.any? || @user.flikes.any? || @user.likes.any? %>
+	    	<% if !@pinned_posts.any? %>
+	    		<h3 class="show-page-heading">Du hast leider noch keine eigenen angepinnten Beiträge erstellt.</h3>
+	    	<% else %>
+	    		<h3 class="show-page-heading">Angepinnter Beitrag</h3>
+	    			<div class="show-wrapper">
+
+				    	<% @pinned_posts.each do |post| %>
+					    	<div class="col-md-6">
+				      			<%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>
+					    	</div>
+					    <% end %>
+
+			    	</div>
+	    	<% end %>
+
+
+
 	    	<% if !@user.posts.any? %>
 	    		<h3 class="show-page-heading">Du hast leider noch keine eigenen Beiträge erstellt.</h3>
 	    	<% else %>
@@ -23,7 +40,7 @@
 		    <h3 class="show-page-heading">Deine Favoriten</h3>
 
 		    <div class="show-wrapper">
-			    <% @liked_fakeposts.reverse.each do |post| %>
+			    <% @liked_allposts.reverse.each do |post| %>
 			    	<div class="col-md-6">
 				        <% if post.is_a?(Post) %>
 				          <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 

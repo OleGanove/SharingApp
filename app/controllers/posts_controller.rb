@@ -96,6 +96,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   # Views for real and fakeposts
   def view
     @post = Post.find(params[:post_id])
