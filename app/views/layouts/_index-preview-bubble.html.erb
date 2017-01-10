@@ -2,7 +2,7 @@
 
 	  <div class="time-and-likes">
 
-	  	<% heroku_timezone = post.created_at + 1.hour %>
+	  	<% heroku_timezone = post.created_at %>
 
 	  	<div class="time"><%= time_ago_in_words(heroku_timezone) %></div>
 

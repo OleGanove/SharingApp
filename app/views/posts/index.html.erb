@@ -80,7 +80,7 @@ $(document).ready(function(){
   // Nach 2, 6 und 18 Minuten [1080000, 360000, 120000]
   // Minuten (ACHTUNG: umgedreht)
   // Ein bisschen später, damit es mit der Fake-Time passt.
-  <% ms_in_future = [1082000, 362000, 122000]%>
+  <% ms_in_future = [1080000, 360000, 120000]%>
 
   <% ms_from_current_sign_in_on = [] %>
 
@@ -139,7 +139,6 @@ $(document).ready(function(){
             //alert("Das sind meine Daten: "+ futurePostsIds);
             $(".view-" + futurePostsIds[i]).html(0);
             $(".like-" + futurePostsIds[i]).html(0);
-
           },
           error: function(jqXHR, textStatus, errorThrown) {              
             console.log(textStatus, errorThrown);
