@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     @pinned = @pinned.sort_by(&:fake_time).reverse
 
     # Random posts
-    @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()").first(9)
+    @random_fposts = @fake_posts.where(futurepost: false).order("RANDOM()")
 
     # Update views and likes after each request
     # Nur eigene Posts aktualisieren, wenn 

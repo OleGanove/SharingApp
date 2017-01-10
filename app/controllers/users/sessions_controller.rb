@@ -1,8 +1,9 @@
 class Users::SessionsController < Devise::SessionsController
+  after_action  :set_pinned_posts, only: [:create]
 
   def create
     super do |user|
-
+      @user = user
       # Einträge der Fakeposts resetten
       Fpost.all.each do |fp|
         fp.fill_like_and_view_number
@@ -10,8 +11,8 @@ class Users::SessionsController < Devise::SessionsController
         fp.save!
       end
 
-      #pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
-      pinnedPosts = Fpost.order("RANDOM()").limit(9)
+      #pinnedPosts = Fpost.offset(rand(Fpost.count) - 11).limit(11) 
+      pinnedPosts = Fpost.order("RANDOM()").limit(11)
       pinnedPosts.update_all(pinned: true) 
 
 
@@ -21,6 +22,7 @@ class Users::SessionsController < Devise::SessionsController
       Fpost.all.each do |fp|
         user.randomized_fposts.new(fpost: fp)
       end
+
 
       # Die angepinnten Posts multiplizieren
 
@@ -35,6 +37,7 @@ class Users::SessionsController < Devise::SessionsController
                                   highlikes: 1 + post.highlikes * 3)
         end
       end
+
 
       #user.set_group_belonging
       #user.save
@@ -56,8 +59,23 @@ class Users::SessionsController < Devise::SessionsController
         # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
         i = i * 3
       end
-
     end
   end
+
+  def set_pinned_posts
+    Fpost.where(pinned: true).all.each do |post|
+      @user.randomized_fposts.where(fpost_id: post.id).each do |post|
+        post.set_faketime_for_pinnedposts
+      end
+    end
+
+    # Der 1. Post soll einen Tag und der letzte 30 Tage her sein, die dazwischen werden randomisiert
+    first = Fpost.where(pinned: true).first
+    last = Fpost.where(pinned: true).last
+
+    @user.randomized_fposts.where(fpost_id: first.id).update_all(fake_time: 1.days.ago)
+    @user.randomized_fposts.where(fpost_id: last.id).update_all(fake_time: 30.days.ago)
+  end
+
 end
 

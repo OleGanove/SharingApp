@@ -4,7 +4,6 @@ class RandomizedFpost < ApplicationRecord
 
   after_create :set_fake_time
 
-  private
 
   def random_time(from = 0.0, to = Time.now) 
     t = Time.at(from + rand * (to.to_f - from.to_f))
@@ -26,7 +25,10 @@ class RandomizedFpost < ApplicationRecord
     else
       self.update_attributes(fake_time: random_time(10.days.ago))
     end
+  end
 
+  def set_faketime_for_pinnedposts
+    self.update_attributes(fake_time: random_time(1.days.ago, 30.days.ago))
   end
 end
 

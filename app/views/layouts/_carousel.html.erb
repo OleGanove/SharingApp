@@ -17,7 +17,7 @@
       </div>
     <% end %>
   <% else %>
-    <% @fake_posts.each do |post| %>
+    <% @random_fposts.each do |post| %>
       <div>
         <% if post.is_a?(Post) %>
           <%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %> 

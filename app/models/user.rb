@@ -2,7 +2,13 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  after_create :set_group_belonging, :reset_fakeposts, :reset_randomized_fposts, :multiply_views_of_pinned_posts, :set_future_posts
+  after_create  :set_group_belonging, 
+                :reset_fakeposts, 
+                :reset_randomized_fposts, 
+                :multiply_views_of_pinned_posts, 
+                :set_future_posts, 
+                :set_pinned_posts
+
   attr_accessor :login
   
   # User can create posts (but actually no fposts... egal)
@@ -74,8 +80,12 @@ class User < ApplicationRecord
     #pinnedPosts = Fpost.offset(rand(Fpost.count) - 9).limit(9) 
 
     # ACHTUNG: Bei mySQL funktioniert nur RAND()
-    pinnedPosts = Fpost.order("RANDOM()").limit(9)  
+    pinnedPosts = Fpost.order("RANDOM()").limit(11)  
     pinnedPosts.update_all(pinned: true) 
+
+    pinnedPosts.each do |post|
+      self.randomized_fposts.where(fpost_id: post.id).update_all(fake_time: Time.now)
+    end
   end
 
 
@@ -123,6 +133,21 @@ class User < ApplicationRecord
 
       end
   end
+
+  def set_pinned_posts
+    Fpost.where(pinned: true).all.each do |post|
+      self.randomized_fposts.where(fpost_id: post.id).each do |post|
+        post.set_faketime_for_pinnedposts
+      end
+    end
+
+    first = Fpost.where(pinned: true).first
+    last = Fpost.where(pinned: true).last
+
+    self.randomized_fposts.where(fpost_id: first.id).update_all(fake_time: 1.days.ago)
+    self.randomized_fposts.where(fpost_id: last.id).update_all(fake_time: 30.days.ago)
+  end
+
 end
 
 
