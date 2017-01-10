@@ -3,10 +3,10 @@
 
 	  <div class="time-and-likes">
 
-	  	<% heroku_timezone = DateTime.parse(post.fake_time.to_s).localtime + 1.hour %>
+	  	<% heroku_timezone = DateTime.parse(post.fake_time.to_s).localtime %>
 
 	  	<div class="time"><%= time_ago_in_words(heroku_timezone) %></div>
-	  	
+	  	<div class="time"> | <%= heroku_timezone %></div>
 	  	<div class="views icons">
 	  		<span class="counter view-<%=post.id%>"> 
 	  		  <% num_of_user_views = post.fviews.where(user_id: current_user).size %>

@@ -108,7 +108,7 @@ class User < ApplicationRecord
 
       futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count) - 3).limit(3) 
 
-      i = 3
+      i = 2
 
       # 3 Fakeposts sollen in der Zukunft sein
       futurePosts.each do |fp|
@@ -119,11 +119,8 @@ class User < ApplicationRecord
         @fakepost.update_all(lowviews: 0, highviews: 0, lowlikes: 0, highlikes: 0, futurepost: true, pinned: false)
 
         # Da ich nicht auf lowviews/highviews etc. zugreifen kann, brauche ich den Post an sich:
-        if self.group == 2 || self.group == 3
-          i = i * 3
-        else 
-          i = i * 9
-        end
+        i = i * 3
+
       end
   end
 end

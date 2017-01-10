@@ -76,14 +76,11 @@ $(document).ready(function(){
 
   // Deklaration von zukünftigen Zeitpunkten in Millisekunden
 
-  // Bei Kurzlebigkeit: nach 27, 9, 3 [1620000, 540000, 180000] Minuten erscheint ein Post 
-  // Bei Langlebigkeit: nach 243, 27, 9 [14580000, 1620000, 540000] Minuten (ACHTUNG: umgedreht)
-
-  <% if current_user.group == 2 || current_user.group == 3 %>
-    <% ms_in_future = [120000, 60000, 6000]%>
-  <% else %>
-    <% ms_in_future = [120000, 60000, 6000]%>
-  <% end %>
+  // In beiden Bedingungen erscheinen zur selben Zeit neue Posts
+  // Nach 2, 6 und 18 Minuten [1080000, 360000, 120000]
+  // Minuten (ACHTUNG: umgedreht)
+  // Ein bisschen später, damit es mit der Fake-Time passt.
+  <% ms_in_future = [1082000, 362000, 122000]%>
 
   <% ms_from_current_sign_in_on = [] %>
 
