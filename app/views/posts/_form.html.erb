@@ -1,5 +1,5 @@
 
-    <div class="forms new-post">
+    <div class="new-post">
     <h2>Neuen Beitrag erstellen</h2>
     <%= form_for @post do |f| %>
 
@@ -34,7 +34,7 @@
     
       <%= f.hidden_field :first_time_visited_at, value: Time.now %>
 
-      <%= f.submit class: "btn btn-primary" %>
+      <%= f.submit "Beitrag erstellen", class: "btn btn-primary" %>
 
     <% end %>
     </div>  

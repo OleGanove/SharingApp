@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post 'posts/view'  => 'posts#view'
   get 'posts/reset_future_posts' => 'posts#reset_future_posts'
 
+
   authenticated :user do 
     root "posts#index"
   end

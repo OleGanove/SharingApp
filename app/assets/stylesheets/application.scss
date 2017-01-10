@@ -282,6 +282,17 @@ input[type="checkbox"]{
 
 
 .edit-profile, .new-post{
+  form {
+    width: 90%;
+    margin: 0 auto;
+
+    input, textarea {
+      margin-bottom: 3em;
+    }
+    textarea{
+      height: 11em;
+    }
+  }
 }
 
 .info-text {
@@ -565,7 +576,7 @@ body {
   width: 82%;
   margin: 0 auto;
   padding-left: 1em;
-  margin-top: -3em;
+  margin-top: -0.8em;
   margin-bottom: 3em;
 }
 /* Dashboard Header*/
