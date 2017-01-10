@@ -7,9 +7,10 @@
 
     	<div class="readers">
     	  <h4>Dein Profil, <%= @user.first_name %> <%= @user.last_name %>!</h4>
-    	  <p>Hier findest du alle deine Beiträge</p>
+    	  <p>Hier findest du all deine Beiträge und Favoriten</p>
           <p> Beiträge: <%= @user.posts.size %> </p>
           <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
+          <p> Favoriten: <%= @likes.size %></p>
     	</div>
     </div>
 
