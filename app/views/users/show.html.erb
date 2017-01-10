@@ -6,22 +6,22 @@
 	<div class="col-md-8">
 
 	    <% if @user.posts.any? || @user.flikes.any? || @user.likes.any? %>
-	    	<% if !@pinned_posts.any? %>
-	    		<h3 class="show-page-heading">Du hast leider noch keine eigenen angepinnten Beiträge erstellt.</h3>
-	    	<% else %>
-	    		<h3 class="show-page-heading">Angepinnter Beitrag</h3>
-	    			<div class="show-wrapper">
+	    	<% if current_user.group == 0 || current_user.group == 1 %>
+		    	<% if !@pinned_posts.any? %>
+		    		<h3 class="show-page-heading">Du hast leider noch keine eigenen angepinnten Beiträge erstellt.</h3>
+		    	<% else %>
+		    		<h3 class="show-page-heading">Angepinnter Beitrag</h3>
+		    			<div class="show-wrapper">
 
-				    	<% @pinned_posts.each do |post| %>
-					    	<div class="col-md-6">
-				      			<%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>
-					    	</div>
-					    <% end %>
+					    	<% @pinned_posts.each do |post| %>
+						    	<div class="col-md-6">
+					      			<%= render :partial => "layouts/index-preview-bubble", :locals => {:post => post} %>
+						    	</div>
+						    <% end %>
 
-			    	</div>
+				    	</div>
+		    	<% end %>
 	    	<% end %>
-
-
 
 	    	<% if !@user.posts.any? %>
 	    		<h3 class="show-page-heading">Du hast leider noch keine eigenen Beiträge erstellt.</h3>
