@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   post 'posts/fview' => 'posts#fview'
   post 'posts/view'  => 'posts#view'
+  get 'posts/unpin' => 'posts#unpin'
   get 'posts/reset_future_posts' => 'posts#reset_future_posts'
+
 
 
   authenticated :user do 

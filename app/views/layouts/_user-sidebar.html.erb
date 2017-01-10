@@ -9,7 +9,9 @@
     	  <h4>Dein Profil, <%= @user.first_name %> <%= @user.last_name %>!</h4>
     	  <p>Hier findest du all deine Beiträge und Favoriten</p>
           <p> Beiträge: <%= @user.posts.size %> </p>
-          <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
+          <% if current_user.group == 0 || current_user.group == 1 %>
+            <p> Angepinnte Beiträge: <%= @user.posts.where(pinned: true).size %></p>
+          <% end %>
           <p> Favoriten: <%= @likes.size %></p>
     	</div>
     </div>

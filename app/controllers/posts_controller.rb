@@ -122,6 +122,17 @@ class PostsController < ApplicationController
     end
   end
 
+  
+  def unpin
+    @posts = Post.where(user_id: current_user.id, pinned: true)
+    @posts.update_all(pinned: false)
+
+    flash[:notice] = "Dein Beitrag wurde erfolgreich entpinnt."
+
+    redirect_to :back
+  end
+
+
   # Wenn die Futureposts erscheinen, sollen sie 0 likes und 0 views haben!
   def reset_future_posts
     @futureposts = Fpost.where(futurepost: true)
