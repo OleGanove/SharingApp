@@ -8,7 +8,7 @@
 	    <% if @user.posts.any? || @user.flikes.any? || @user.likes.any? %>
 	    	<% if current_user.group == 0 || current_user.group == 1 %>
 		    	<% if !@pinned_posts.any? %>
-		    		<h3 class="show-page-heading">Du hast leider noch keine eigenen angepinnten Beiträge erstellt.</h3>
+		    		<h3 class="show-page-heading">Du hast noch keinen  angepinnten Beitrag.</h3>
 		    	<% else %>
 		    		<h3 class="show-page-heading">Angepinnter Beitrag</h3>
 		    			<div class="show-wrapper">

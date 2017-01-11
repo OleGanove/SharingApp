@@ -22,7 +22,7 @@ Fpost.create!([{
   },
   {
   title: 'Neue Leseregeln für die Deutsche Nationalbibliothek',
-  description: 'Kuratiert in «Literatur». In der Deutschen Nationalbibliothek gilt ab sofort «digital first». Liegt ein Buch digital vor, erhalten Leser dies zur Nutzung und nicht die gedruckte Version.',
+  description: 'In der Deutschen Nationalbibliothek gilt ab sofort «digital first». Liegt ein Buch digital vor, erhalten Leser dies zur Nutzung und nicht die gedruckte Version.',
   link: 'http://www.faz.net/aktuell/feuilleton/buecher/themen/neue-leseregeln-fuer-die-deutsche-nationalbibliothek-14538350.html',
   pinned: false,
   time_ago: 8343,
