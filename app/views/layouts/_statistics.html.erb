@@ -13,9 +13,9 @@
 
       <span class="stats-small">
         <% if current_user.group == 0 || current_user.group == 2 %>
-          Leser (online): <%= rand(210..240) %>
+          Leser (heute): <%= current_user.highreaders %>
         <% else %>
-          Leser (online): <%= rand(35..40) %>
+          Leser (heute): <%= current_user.lowreaders %>
         <% end %>
       <span>
     </div>

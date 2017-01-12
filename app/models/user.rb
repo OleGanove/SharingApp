@@ -7,7 +7,8 @@ class User < ApplicationRecord
                 :reset_randomized_fposts, 
                 :multiply_views_of_pinned_posts, 
                 :set_future_posts, 
-                :set_pinned_posts
+                :set_pinned_posts,
+                :set_readers_today 
 
   attr_accessor :login
   
@@ -146,6 +147,10 @@ class User < ApplicationRecord
 
     self.randomized_fposts.where(fpost_id: first.id).update_all(fake_time: 1.days.ago)
     self.randomized_fposts.where(fpost_id: last.id).update_all(fake_time: 30.days.ago)
+  end
+
+  def set_readers_today 
+    self.update_attributes(lowreaders: 41, highreaders: 410)
   end
 
 end

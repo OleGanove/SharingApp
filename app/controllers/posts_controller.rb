@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :post_owner, only: [:edit, :update, :destroy]
   before_action :update_fakelikes_and_fakeviews, only: [:index]
+  before_action :update_lowreaders_and_highreaders, only: [:index]
   after_action  :update_reallikes_and_realviews, only: [:index]
 
   def index
@@ -204,6 +205,11 @@ class PostsController < ApplicationController
                           lowlikes: fp.lowlikes + rand(0..1),
                           highlikes: fp.highlikes + rand(0..3))
     end   
+  end
+
+  def update_lowreaders_and_highreaders
+    current_user.update_attributes( lowreaders: current_user.lowreaders + rand(1..3),
+                                    highreaders: current_user.highreaders + rand(3..5))
   end
 
 

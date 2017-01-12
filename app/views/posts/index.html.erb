@@ -5,6 +5,9 @@
   <% content_for :title, "Beitrag erfolgreich erstellt" %>
 <% end %>
 
+<% if flash[:notice] == "Deine Daten wurden aktualisiert." %>
+  <% content_for :title, "Daten aktualisiert" %>
+<% end %>
 
 
 <div class="wrap-all-posts col-md-10 col-md-offset-1">
