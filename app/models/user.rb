@@ -119,7 +119,7 @@ class User < ApplicationRecord
 
       #futurePosts = self.randomized_fposts.offset(rand(self.randomized_fposts.count) - 3).limit(3) 
       
-      futurePosts = user.randomized_fposts.order("RANDOM()").limit(3)
+      futurePosts = self.randomized_fposts.order("RANDOM()").limit(3)
       i = 2
 
       # 3 Fakeposts sollen in der Zukunft sein
