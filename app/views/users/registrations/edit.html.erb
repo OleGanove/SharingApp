@@ -33,10 +33,10 @@
       </p>
     <%- end -%>
 
-    <div><%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "freilassen, wenn du es nicht ändern möchtest") %>)</i><br />
+    <div><%= f.label :password, "Passwort ändern" %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "freilassen, wenn du es nicht ändern möchtest") %>)</i><br />
     <%= f.password_field :password, :autocomplete => "off" %></div>
 
-    <div><%= f.label :password_confirmation %><br />
+    <div><%= f.label :password_confirmation, "Neues Passwort bestätigen" %><br />
     <%= f.password_field :password_confirmation %></div>
 
     <div><%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'Wir brauchen dein jetziges Passwort, um die Änderungen zu bestätigen.') %>)</i><br />
