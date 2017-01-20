@@ -96,7 +96,7 @@
 
 		    	<script>
 			      $('.read-more-<%= post.id %>').on('click', function(e) {
-			        e.preventDefault()
+			        e.preventDefault();
 			        $(this).parent().html('Kurator/in <%= post.first_name %> <%= post.last_name %>: <%= post.description %>')
 			      })		    		
 		    	</script>

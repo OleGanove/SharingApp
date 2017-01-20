@@ -75,19 +75,22 @@
 		  <p class="curator-comment">
 		    Kurator/in <%= post.user.first_name %> <%= post.user.last_name %>: 
 
+		    
 		    <% if post.description.length > 120 %>
 		    	<%= truncate(post.description, length: 120) %>
 		    	<%= link_to 'mehr', '', class: "read-more-#{post.id}" %>
 
 		    	<script>
 			      $('.read-more-<%= post.id %>').on('click', function(e) {
-			        e.preventDefault()
-			        $(this).parent().html('Kurator/in <%= post.first_name %> <%= post.last_name %>: <%= post.description %>')
+			        e.preventDefault();
+			        $(this).parent().html('Kurator/in <%= escape_javascript(post.user.first_name) %> <%= escape_javascript(post.user.last_name) %>: <%= escape_javascript(simple_format(post.description)) %>')
 			      })		    		
 		    	</script>
 		    <% else %>
 		    	<%= post.description %>
 		    <% end %>
+		   
+
 
 		  </p>
 		</div>
